@@ -26,19 +26,57 @@ class ParkingController < ApplicationController
     end
   end
 
+  # def confirmations
+  #   @parking = Park.find_by(user_id: current_user.id)
+  #   max = 400
+  #   min = 100
+  #   if (@parking.finish_on_schedule - @parking.start_on )/3600 <= 1.0
+  #     @price = 100
+  #   elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 2.0
+  #     @price =200
+  #   elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 3.0
+  #     @price =300
+  #   else
+  #     @price= 100
+  #   end
+  # end
+
   def confirmations
-    @parking = Park.find_by(user_id: current_user.id)
-    max = 400
-    min = 100
-    if (@parking.finish_on_schedule - @parking.start_on )/3600 <= 1.0
-      @price = 100
-    elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 2.0
-      @price =200
-    elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 3.0
-      @price =300
-    else
-      @price= 400
+    @parking = Park.find_by(user_id:current_user.id)
+
+    start = @parking.start_on
+    finish = @parking.finish_on_schedule
+
+
+    time = (finish - start)/3600
+    n = time
+    money = 0
+
+    m = (n/24).floor + 1
+
+    if (m > 1)
+      for i in 1...m - 1 do
+        n = n - 24
+      end
     end
+    
+    
+
+    if (n < 1)
+      money = 100
+    elsif (n < 2)
+      money = 200
+    elsif (n < 3)
+      money = 300
+    elsif (n< 24)
+      money = 400    
+    end
+
+    money = money*m    
+
+    @price = money
+
+
   end
 
   def finish
