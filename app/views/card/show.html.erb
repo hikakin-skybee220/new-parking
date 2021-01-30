@@ -1,0 +1,8 @@
+<h1>Card#show</h1>
+<p>Find me in app/views/card/show.html.erb</p>
+
+<label for="">登録クレジットカード情報</label><br>
+<%="**** **** **** " + @default_card_information.last4%>
+<label for="">有効期限</label><br>
+<%=@exp_month + " / " + @exp_year%>
+<%= link_to("削除",delete_card_index_path, method: :post, class: "destroy__function__link__btn") %>

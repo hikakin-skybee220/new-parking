@@ -1,0 +1,83 @@
+<%#=TOP%>
+    <div class="section container-fluid" id="pr-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <%= form_for @parking, url: parking_create_path do |f| %>
+                        <div class="row d-flex m-ad pr-bg" id="pr-start-top">
+                            <div class="col-md-6">
+                                <label class="control-label" for="">利用開始時刻</label>
+                                <%= f.text_field :start_on, class: 'form-control', placeholder:@timedisplay, readonly: true%>
+                            </div>     
+                            <div class="col-md-6">
+                                <label class="control-label" for="">利用終了予定時刻</label>
+                                <%= f.datetime_field :finish_on_schedule, class: 'form-control', id: "finishTime" %>
+                            </div>     
+                            <div class="black-opa">利用時間を指定してください</div>
+                            <div class="parking-description-list black-opa">
+                                <ul class="parking-description-inner">
+                                    <li>※ 100円 / h 、最大400円です。</li>
+                                    <li>※ 自転車の出入りがあるため、白線内に駐車をお願いします。</li>
+                                    <li>※ 直近の予約の時間よりも前に利用終了予定時刻を設定してください。</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <%#div class="col-xs-12" id="pr-start-price">
+                            <div class="pr-start-price-inner">
+                                <div class="pr-label d-none">
+                                    予定金額
+                                </div>
+                                <div class="pr-display">
+                                    ¥400(税込)
+                                </div>
+                            </div>
+                        </=div%>                        
+                        <div class="col-xs-12 pr-button">
+                            <% if current_user %>
+                                <%= f.button :type => "submit" do %>
+                                    利用申請する                                
+                                <% end %>
+                            <% else %>
+                                <a href="#" id="user-select-modal-button">
+                                    利用申請する
+                                </a>                       
+                            <% end %>
+                        </div>                                   
+                        <%#=MODAL%>
+                            <div class="user-select-modal-wrapper" id="user-select-modal">    
+                                <div class="user-select-modal-content">
+                                    <div class="overlay"></div>
+                                    <div class="modal">
+                                        <div class="conteiner text-center">
+                                            <div class="row">
+                                                <img src="/me-icon_optimized.png" alt="" class="up-icon">
+                                                <div class="col-xs-12 text">
+                                                    <div class="bold">利用方法を選択する</div>
+                                                    <p class="black-opa">
+                                                        いずれのご利用方法でもクレジットカードのご登録が必要になります。<br>
+                                                        アカウントを作成することで次回のご利用をスムーズにすることができます。
+                                                    </p>
+                                                </div>                        
+                                                <div class="col-xs-12 field up">
+                                                    <%= f.submit "ログイン", class: "form-for-area", :name => 'login' %>
+                                                </div>                                                
+                                                <div class="col-xs-6 field left">     
+                                                    <%= f.submit "アカウント作成", class: "form-for-area", :name => 'new_account' %>
+                                                </div>                        
+                                                <div class="col-xs-6 field right">  
+                                                    <%= f.submit "ゲスト利用", class: "form-for-area", :name => 'guest' %>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                    <% end %>
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

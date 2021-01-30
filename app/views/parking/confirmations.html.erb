@@ -1,0 +1,57 @@
+<%#=TOP%>
+    <div class="section container-fluid" id="pr-con-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="flash-text">
+                        利用申請が完了しました。終了時刻や鍵、白線内の駐車の確認をお願いします。
+                    </div>
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">利用内容</h2>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用開始時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.start_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用終了予定時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.finish_on_schedule.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="parking-description-list black-opa">
+                            <ul class="parking-description-inner">
+                                <li>※ ご自身で設定した利用終了予定時刻までにはお車をお出しください。</li>
+                                <li>※ 利用終了予定時刻よりも早く終了される場合、その時のお時間で再度ご利用金額の計算を行います。</li>
+                                <li>※ 利用終了予定時刻を超えてしまう場合は恐れ入りますが再度申請をお願いします。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" id="pr-start-price">
+                        <div class="pr-start-price-inner">
+                            <div class="pr-label d-none">
+                                予定金額
+                            </div>
+                            <div class="pr-display">
+                                ¥<%=@price%>(税込)
+                            </div>
+                        </div>
+                    </div>        
+                    <div class="col-xs-12 top-button">
+                        <a href="/" class="">
+                            トップページに戻る
+                        </a>
+                    </div>                    
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

@@ -1,0 +1,16 @@
+
+<h1>Card#new</h1>
+<p>Find me in app/views/card/new.html.erb</p>
+<%=form_tag(pay_card_index_path, method: :post ,id:'charge-form', name: "inputForm") do %>
+    <%= label_tag :カード番号 %>
+    <%= text_field_tag :number, "", class: "number", placeholder: "半角数字のみ" ,maxlength: "16", type: "text", id: "card_number" %>
+    <%= label_tag :有効期限 %>
+    <%= select_tag "exp_month" ,options_for_select([['--', ''], ['01', '1'], ['02', '2'], ['03', '3'], ['04', '4'], ['05', '5'], ['06', '6'], ['07', '7'], ['08', '8'], ['09', '9'], ['10', '10'], ['11', '11'], ['12', '12']]) , type: "text"%>
+    <span>月/</span>
+    <%= label_tag :有効期限 %>
+    <%= select_tag "exp_year" ,options_for_select([['--', ''], ['21', '2021'], ['22', '2022'], ['23', '2023'], ['24', '2024'], ['25', '2025'], ['26', '2026'], ['27', '2027'], ['28', '2028'], ['29', '2029'], ['30', '2030'], ['31', '2031'], ['32', '2032']]), type: "text" %>
+    <span>年</span>
+    <%= label_tag :セキュリティコード %>
+    <%= text_field_tag :cvc , "", class: "cvc", placeholder: "カード背面3~4桁の番号", maxlength: "4", id: "cvc"%>
+    <%= submit_tag "追加する" , id: "token_submit"%>
+<% end %>

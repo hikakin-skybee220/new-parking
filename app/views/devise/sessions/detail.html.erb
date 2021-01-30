@@ -1,0 +1,92 @@
+
+<div class="section container-fluid" id="lg-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center">
+                  <div class="pr-md-ad select-pr-md-ad">
+                    <h2>ログイン</h2>
+                    <p class="text-left">
+                        アカウントをお持ちの方はこちらよりログインしてください。ご登録されているクレジットカードより、速やかに利用を開始できます。
+                    </p>
+
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                      <div class="field">
+                        <div class="control-label text-left" for="">メールアドレス</div>
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-area" %>
+                      </div>
+
+                      <div class="field">
+                        <div class="control-label text-left" for="">パスワード</div>
+                        <%= f.password_field :password, autocomplete: "current-password", class: "field-area" %>
+                      </div>
+
+                      <% if devise_mapping.rememberable? %>
+                        <div class="field-memory-login text-left">
+                          <a href="/users/password/new">パスワードをお忘れですか？</a>
+                        </div>
+                      <% end %>
+
+                      <div class="actions">
+                        <%= f.submit "ログイン" %>
+                      </div>
+                    <% end %> 
+                    <p class="or">または</p>
+                    <div class="field">
+                      <a href="/users/auth/facebook">
+                        <p class="sns-login"><i class="fab fa-facebook"></i>facebookでログイン</p>
+                      </a>
+                    </div>  
+                    <div class="field">
+                      <a href="/users/auth/google_oauth2">
+                        <p class="sns-login"><i class="fab fa-google"></i>gmailでログイン</p>
+                      </a>
+                    </div>  
+                    <div class="field">
+                      <a href="/users/auth/twitter">
+                        <p class="sns-login"><i class="fab fa-twitter"></i>twitterでログイン</p>
+                      </a>
+                    </div>  
+                  </div>
+                                               
+                </div>            
+            </div>
+        </div>
+    </div>
+<div class="section container-fluid" id="lg-sct2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center">
+                  <div class="pr-md-ad select-pr-md-ad">
+                    <h2>新規会員登録</h2>
+                    <p class="text-left">
+                        アカウントをお持ちの方はこちらよりログインしてください。ご登録されているクレジットカードより、速やかに利用を開始できます。
+                    </p>
+
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+                      <div class="actions">
+                        <%= f.submit "ログイン" %>
+                      </div>
+                    <% end %> 
+                    <p class="or">または</p>
+                    <div class="field">
+                      <a href="/users/auth/facebook">
+                        <p class="sns-login"><i class="fab fa-facebook"></i>facebookでログイン</p>
+                      </a>
+                    </div>  
+                    <div class="field">
+                      <a href="/users/auth/google_oauth2">
+                        <p class="sns-login"><i class="fab fa-google"></i>gmailでログイン</p>
+                      </a>
+                    </div>  
+                    <div class="field">
+                      <a href="/users/auth/twitter">
+                        <p class="sns-login"><i class="fab fa-twitter"></i>twitterでログイン</p>
+                      </a>
+                    </div>  
+                  </div>
+                                               
+                </div>            
+            </div>
+        </div>
+    </div>

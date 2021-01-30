@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parking</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>    
+    <script type="text/javascript" src="https://js.pay.jp/"></script>    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    
+
+    <!-- Fontawesome CSS -->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+    <!-- Favicon -->
+	  <link rel="shortcut icon" href="/favicon.png">
+      
+  </head>
+
+  <body>
+    <header>
+      <div class="header default">
+          <div class="header-inner">
+              <div class="header-logo">
+                  <a href="/">
+                      <img src="/SHIMAHIKA PARKING.png" alt="ヘッダーロゴ">
+                  </a>
+              </div>
+              <div class="header-menu">
+                  <div class="header-menu-list">
+                      <ul class="header-menu-inner">
+                        <% if current_user %>
+                          <li>
+                              <a href="#" class="login black">
+                                  <i class="fas fa-sign-in-alt header-menu-mark"></i>設定
+                              </a>
+                          </li>
+                        <% else %>
+                          <li>
+                              <a href="/login" class="login black">
+                                  <i class="fas fa-sign-in-alt header-menu-mark"></i>ログイン
+                              </a>
+                          </li>
+                        <% end %>
+                        <% if current_user %>
+                        <li>
+                            <a href="/logout" class="new-account">ログアウト</a>
+                        </li>
+                        <% else %>   
+                        <li>
+                            <a href="/signup" class="new-account">アカウント作成</a>
+                        </li>
+                        <% end %>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+  <%= render 'layouts/notifications' %>
+  
+    <%= yield %>
+    <footer id="footer">
+    <div class="inner">
+        <div class="madeby">Made by Hikaru Shimada</div>
+        <div class="sns">
+            <p class="follow">Follow Me</p>
+            <a href="https://www.facebook.com/shimahika21/?ref=page_internal" target="_blank" rel="noopener noreferrer"><p class="facebook-foo sns-item-foo"><i class="fab fa-facebook-f"></i>Facebook</p></a>
+            <a href="https://twitter.com/Hikkar_skybee" target="_blank" rel="noopener noreferrer"><p class="twitter-foo sns-item-foo"><i class="fab fa-twitter"></i>Twitter</p></a>
+        </div>
+    </div>
+</footer>
+
+  </body>
+
+</html>

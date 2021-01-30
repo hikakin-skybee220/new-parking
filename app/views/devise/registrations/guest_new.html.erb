@@ -1,0 +1,41 @@
+<div class="section container-fluid" id="lg-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center">
+                  <div class="pr-md-ad">
+                    <h2>ゲストアカウント作成aa</h2>
+                    <p class="black-opa my-20">ゲストアカウントでご登録いただきますメールアドレス、パスワード、クレジットカード情報はご利用終了後全てのデータを削除させていただきます。</p>
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                      <%= render "devise/shared/error_messages", resource: resource %>
+                      <div class="field">
+                        <div class="control-label text-left" for="">メールアドレス</div>
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-area" %>
+                      </div>
+                      <div class="field">
+                        <div class="control-label text-left" for="">
+                          パスワード
+                          <% if @minimum_password_length %>
+                          （<%= @minimum_password_length %>文字以上）
+                          <% end %>
+                        </div>
+                      
+                        <%= f.password_field :password, autocomplete: "new-password", class: "field-area" %>
+                      </div>                      
+                      <div class="field">
+                        <div class="control-label text-left" for="">パスワード（確認用）</div>
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "field-area" %>
+                      </div>
+
+                      <div class="actions">
+                        <%= f.submit "ゲストアカウントで登録" %>
+                      </div>
+                    <% end %> 
+                    <div class="field-memory-login py-20">
+                      <a href="/login">すでにアカウントをお持ちですか？</a>
+                    </div>
+                  </div>
+                                               
+                </div>            
+            </div>
+        </div>
+    </div>
