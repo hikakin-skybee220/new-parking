@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_014833) do
+ActiveRecord::Schema.define(version: 2021_01_30_092804) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_014833) do
     t.datetime "start_on"
     t.datetime "finish_on"
     t.datetime "finish_on_schedule"
+    t.integer "finish_stamp"
   end
 
   create_table "tests", force: :cascade do |t|
