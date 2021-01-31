@@ -25,7 +25,7 @@ class ParkingController < ApplicationController
   #   min = 100
   #   if (@parking.finish_on_schedule - @parking.start_on )/3600 <= 1.0
   #     @price = 100
-  #   elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 2.0
+  #   elsif (hgjhui@parking.finish_on_schedule - @parking.start_on )/3600 <= 2.0
   #     @price =200
   #   elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 3.0
   #     @price =300
@@ -35,46 +35,72 @@ class ParkingController < ApplicationController
   # end
 
   def confirmations
-    @parking = Park.find_by(user_id:current_user.id)
+    @parking = Park.find_by(user_id:current_user.id , finish_stamp: "no")
 
     start = @parking.start_on
     finish = @parking.finish_on_schedule
+    
 
-
-    time = (finish - start)/3600
+    time = ((finish - start) / 3600).to_f
     n = time
+    
     money = 0
 
-    m = (n/24).floor + 1
-
-    if (m > 1)
-      for i in 1...m - 1 do
-        n = n - 24
-      end
-    end
-    
-    
-
-    if (n < 1)
-      money = 100
-    elsif (n < 2)
-      money = 200
-    elsif (n < 3)
-      money = 300
-    elsif (n< 24)
-      money = 400    
+    @time = time
+    day = (time/24).floor + 1
+    for i in 1...(day) do
+     n = n - 24
     end
 
-    money = money*m    
+    if (n <= 1 && n > 0)
+        money = 100
+    elsif (n <= 2)
+        money = 200
+    elsif (n <= 3)
+        money = 300
+    elsif (n <= 24)
+        money = 400
+    end
 
-    @price = money
+    money = money + 400 * (day - 1)
 
+    @price = money 
 
   end
 
   def finish
-    @parking = Park.find_by(user_id: current_user.id, finish_stamp: "no")
+    @parking = Park.where(user_id: current_user.id, finish_stamp: "no").last
     @parking.finish_on = Time.current
+    start = @parking.start_on
+    finish = @parking.finish_on
+    
+
+    time = ((finish - start) / 3600).to_f
+    n = time
+    
+    money = 0
+
+    @time = time
+    day = (time/24).floor + 1
+    for i in 1...(day) do
+     n = n - 24
+    end
+
+    if (n <= 1 && n > 0)
+        money = 100
+    elsif (n <= 2)
+        money = 200
+    elsif (n <= 3)
+        money = 300
+    elsif (n <= 24)
+        money = 400
+    end
+
+    money = money + 400 * (day - 1)
+
+    
+    @price = money 
+    @parking.price = @price
     if @parking.save
       redirect_to("/purchase/index")
     else
