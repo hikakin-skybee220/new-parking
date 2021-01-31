@@ -1,4 +1,5 @@
 class ParkingController < ApplicationController
+  before_action :authenticate_user!, except: [:start, :create]
   def start
     @parking = Park.new
     @time = Time.current
