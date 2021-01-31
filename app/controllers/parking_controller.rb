@@ -35,7 +35,7 @@ class ParkingController < ApplicationController
   end
 
   def finish
-    @parking = Park.find_by(user_id: current_user.id, finish_stamp: "no")
+    @parking = Park.find_by(user_id: current_user.id, finish_stamp: "no").last
     @parking.finish_on = Time.current
     if @parking.save
       redirect_to("/purchase/index")
