@@ -25,7 +25,7 @@ class ParkingController < ApplicationController
   #   min = 100
   #   if (@parking.finish_on_schedule - @parking.start_on )/3600 <= 1.0
   #     @price = 100
-  #   elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 2.0
+  #   elsif (hgjhui@parking.finish_on_schedule - @parking.start_on )/3600 <= 2.0
   #     @price =200
   #   elsif (@parking.finish_on_schedule - @parking.start_on )/3600 <= 3.0
   #     @price =300
@@ -52,8 +52,6 @@ class ParkingController < ApplicationController
         n = n - 24
       end
     end
-    
-    
 
     if (n < 1)
       money = 100
