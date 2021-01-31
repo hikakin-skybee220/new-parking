@@ -1,6 +1,12 @@
 Rails.application.routes.draw do  
-  get 'purchase/index'
-  get 'purchase/done'
+  resources :purchase, only: [:index] do
+    collection do
+      get 'index', to: 'purchase#index'
+      post 'pay', to: 'purchase#pay'
+      get 'done', to: 'purchase#done'
+      get 'history', to: 'purchase#history'
+    end
+  end
   # devise_for :guests
   # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 #   devise_for :guests, controllers: {

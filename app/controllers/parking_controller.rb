@@ -8,19 +8,12 @@ class ParkingController < ApplicationController
   def create    
     params[:park][:start_on] = Time.current
     @parking = Park.new(params.require(:park).permit(:start_on, :finish_on_schedule))
+    @parking.finish_stamp = "no"
     if current_user
       @parking.user_id = current_user.id
     end
-    if @parking.save
-      if params[:login]
-        redirect_to("/login")
-      elsif params[:new_account]
-        redirect_to("/signup")
-      elsif params[:guest]
-        redirect_to("/guest/signup")
-      else
-        redirect_to("/parking/confirmations")
-      end             
+    if @parking.save      
+      redirect_to("/parking/confirmations")      
     else
       render("/parking/start")
     end
@@ -42,7 +35,7 @@ class ParkingController < ApplicationController
   end
 
   def finish
-    @parking = Park.find_by(user_id: current_user.id)
+    @parking = Park.find_by(user_id: current_user.id, finish_stamp: "no")
     @parking.finish_on = Time.current
     if @parking.save
       redirect_to("/purchase/index")
@@ -51,6 +44,7 @@ class ParkingController < ApplicationController
       flash[:notice] = "もう1度最初からお願いします。"
     end
   end
+
   def how_user
 
   end

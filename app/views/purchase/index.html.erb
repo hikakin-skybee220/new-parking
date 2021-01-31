@@ -1,2 +1,94 @@
-<h1>Purchase#index</h1>
-<p>Find me in app/views/purchase/index.html.erb</p>
+<%#=TOP%>
+    <div class="section container-fluid pur-ind-sct1" id="pur-ind-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="flash-text ">
+                        <%=@user.name%> 様<br>
+                        ご利用ありがとうございました。以下のご利用内容をご確認ください。
+                    </div>
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">利用内容</h2>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用開始時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.start_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用終了時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.finish_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="parking-description-list black-opa">
+                            <ul class="parking-description-inner">
+                                <li>※ 次のご利用・ご予約があります。速やかにお車をお出しください。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" id="pr-start-price">
+                        <div class="pr-start-price-inner">
+                            <div class="pr-label d-none">
+                                支払い金額
+                            </div>
+                            <div class="pr-display">
+                                ¥<%=@price%>(税込)
+                            </div>
+                        </div>
+                    </div>        
+                    <div class="col-xs-12 top-button">
+                        <a href="/" class="pur-ind-top-button">
+                            トップページに戻る
+                        </a>
+                    </div>    
+                    <div class="col-xs-12">
+                        <% if @user.card.present? %>
+                          <div class="car-info-title">
+                            クレジットカード情報
+                            <div class="card-info">
+                                <div class="card-info-brand"></div>
+                                <div class="card-indo-numbers">
+                                    <div class="number">
+                                        <%="**** **** **** " + @default_card_information.last4%>
+                                    </div>
+                                    <div class="expiration-date">
+                                        <div class="expiration-date-title">
+                                            有効期限
+                                        </div>
+                                        <div class="expiration-date-info">
+                                            <%=@exp_month + " / " + @exp_year%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 top-button">
+                            <%= link_to "登録クレジットカードで購入する", pay_purchase_index_path, method: :post, class: "btn" %>
+                          </div>  
+                        <% else %>        
+                            <div class="col-xs-12 top-button">
+                                <%= form_tag(action: :pay, method: :post) do %>
+                                    <script
+                                        type="text/javascript"
+                                        src="https://checkout.pay.jp/"
+                                        class="payjp-button"
+                                        data-key="pk_test_0de8f3e117738d2bfa08c0f2"
+                                        data-text="支払う">
+                                    </script>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>                
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

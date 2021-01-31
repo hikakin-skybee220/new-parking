@@ -1,2 +1,50 @@
-<h1>Purchase#done</h1>
-<p>Find me in app/views/purchase/done.html.erb</p>
+<%#=TOP%>
+    <div class="section container-fluid pur-done-sct1" id="pur-done-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="flash-text">
+                        お支払いが完了しました。
+                    </div>
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">お支払い内容の確認</h2>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用開始時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.start_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用終了予定時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.finish_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>                        
+                        <div class="" id="pr-start-price">
+                            <div class="pr-start-price-inner">
+                                <div class="pr-label d-none">
+                                    お支払い金額
+                                </div>
+                                <div class="pr-display">
+                                    ¥<%=@price%>(税込)
+                                </div>
+                            </div>
+                        </div>                                                            
+                    </div>
+                    <div class="col-xs-12 top-button">
+                        <a href="/" class="">
+                            トップページに戻る
+                        </a>
+                    </div>                    
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

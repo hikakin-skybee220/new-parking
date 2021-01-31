@@ -462,10 +462,10 @@ ul{
         font-size: 45px;
         display: inline-block;
     }
+    
 
-
-    // PARKING CONFIRMATIONS
-    #pr-sct1, #pr-con-sct1{
+    // PARKING CONFIRMATIONS PUR-INDEX
+    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1{
         .pr-md-ad{
             margin: 25px 0;
             padding: 0 18%;
@@ -547,6 +547,29 @@ ul{
                     }               
                 }
             }
+        }
+    }
+
+    // PUR-INDEX
+    #pur-ind-sct1{
+        .flash-text{
+            border-left: 8px solid #a7ff9d;
+        }
+        .pur-ind-top-button{
+            border: 1px solid #556b3f;
+            color: #556b3f;
+            &:hover {             
+                color: #fff;           
+                background-color: #556b3f;
+            }       
+        }
+    }
+
+    // PUR-DONE
+    #pur-done-sct1{
+        div#pr-start-price {
+            margin: 30px 0 10px;
+            text-align: center;
         }
     }
 
