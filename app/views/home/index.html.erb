@@ -29,9 +29,15 @@
                             <% end %>
                         </div>
                         <div class="col-xs-6">
-                            <a href="/parking/finish" id="parking-finish-modal-button">
-                                <p>利用を終了する</p>
-                            </a>
+                            <% if current_user %>
+                                <a href="/parking/finish" id="parking-finish-modal-button">
+                                    <p>利用を終了する</p>
+                                </a> 
+                            <% else %>
+                                <a href="/parking/start" id="user-select-modal-button">
+                                    <p>利用を終了する</p>
+                                </a>                
+                            <% end %>
                         </div>
                     </div>
                 </div>            
@@ -139,15 +145,21 @@
                 <div class="conteiner text-center">
                     <div class="row">
                         <img src="/me-icon_optimized.png" alt="" class="up-icon">
-                        <div class="col-xs-12 text">
-                            <div class="bold">利用終了を確定してよろしいですか？</div>
-                            <p class="black-opa pt-2per">
-                                利用終了確定時刻 : <%=@timedisplay%>
-                            </p>                            
-                        </div>     
-                        <div class="col-xs-12 next-button">
-                            <%= link_to("確定する",parking_finish_path, method: :post) %>
-                        </div>                                              
+                        <% if @parking.finish_stamp == "yes" %>
+                            <div class="col-xs-12 text">
+                                <div class="bold">何も利用していません。</div>                       
+                            </div>  
+                        <% elsif @parking.finish_stamp == "no" %>  
+                            <div class="col-xs-12 text">
+                                <div class="bold">利用終了を確定してよろしいですか？</div>
+                                <p class="black-opa pt-2per">
+                                    利用終了確定時刻 : <%=@timedisplay%>
+                                </p>                            
+                            </div>     
+                            <div class="col-xs-12 next-button">
+                                <%= link_to("確定する",parking_finish_path, method: :post) %>
+                            </div>                                                                      
+                        <% end %>
                     </div>
                 </div>
             </div>

@@ -1,2 +1,49 @@
-利用履歴を掲載
-<%=current_user.id%>
+<%#=TOP%>
+    <div class="section container-fluid pur-done-sct1" id="pur-his-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">利用一覧</h2>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用開始時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.start_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用終了予定時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@parking.finish_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>    
+                        <div class="list">
+                            <table>
+                                <thead class="text-bold">
+                                    <tr>
+                                        <th>金額</th>
+                                        <th>利用開始日</th>
+                                        <th>利用終了日</th>
+                                        <th>ステータス</th>
+                                        <th>作成日</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>                                                        
+                    </div>
+                    <div class="col-xs-12 top-button">
+                        <a href="/" class="">
+                            トップページに戻る
+                        </a>
+                    </div>                    
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
