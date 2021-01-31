@@ -11,15 +11,29 @@ $(function() {
 
   // MODAL
   var scrollPos;//topからのスクロール位置
-  $('#user-select-modal-button , #parking-finish-modal-button').click(function() {
+  $('#user-select-modal-button').click(function() {
     scrollPos = $(window).scrollTop();//topからのスクロール位置を格納
-    $('.user-select-modal-content , .parking-finish-modal-content').fadeIn();//モーダルをフェードイン
+    $('.user-select-modal-content').fadeIn();//モーダルをフェードイン
     $('.modal').fadeIn();
     $('body').addClass('fixed').css({ top: -scrollPos });//背景固定
     return false;//<a>を無効化
   });
   $('.overlay, .modal__close').click(function() {
-    $('.user-select-modal-content , .parking-finish-modal-content').fadeOut();//モーダルをフェードアウト
+    $('.user-select-modal-content').fadeOut();//モーダルをフェードアウト
+    $('.modal').fadeOut();
+    $('body').removeClass('fixed').css({ top: 0 });//背景固定を解除
+    $(window).scrollTop(scrollPos);//元の位置までスクロール
+    return false;//<a>を無効化
+  });
+  $('#parking-finish-modal-button').click(function() {
+    scrollPos = $(window).scrollTop();//topからのスクロール位置を格納
+    $('.parking-finish-modal-content').fadeIn();//モーダルをフェードイン
+    $('.modal').fadeIn();
+    $('body').addClass('fixed').css({ top: -scrollPos });//背景固定
+    return false;//<a>を無効化
+  });
+  $('.overlay, .modal__close').click(function() {
+    $('.parking-finish-modal-content').fadeOut();//モーダルをフェードアウト
     $('.modal').fadeOut();
     $('body').removeClass('fixed').css({ top: 0 });//背景固定を解除
     $(window).scrollTop(scrollPos);//元の位置までスクロール
