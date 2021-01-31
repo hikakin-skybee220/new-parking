@@ -11,7 +11,7 @@ $(function() {
 
   // MODAL
   var scrollPos;//topからのスクロール位置
-  $('#user-select-modal-button').click(function() {
+  $('#user-select-modal-button, #user-select-modal-finish-button').click(function() {
     scrollPos = $(window).scrollTop();//topからのスクロール位置を格納
     $('.user-select-modal-content').fadeIn();//モーダルをフェードイン
     $('.modal').fadeIn();
