@@ -1,8 +1,48 @@
-<h1>Card#show</h1>
-<p>Find me in app/views/card/show.html.erb</p>
 
-<label for="">登録クレジットカード情報</label><br>
-<%="**** **** **** " + @default_card_information.last4%>
-<label for="">有効期限</label><br>
-<%=@exp_month + " / " + @exp_year%>
-<%= link_to("削除",delete_card_index_path, method: :post, class: "destroy__function__link__btn") %>
+
+<%#=TOP%>
+    <div class="section container-fluid card-show-sct1" id="card-show-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">登録クレジットカード情報</h2>
+                        <div class="my-20 row d-flex">
+                            <div class="col-xs-6 fs ">   
+                                <div class="card-info">
+                                    <div class="card-info-brand">
+                                        <img src="/cards/jcb.png" alt="クレジットカードブランド情報">
+                                    </div>
+                                    <div class="card-info-numbers">
+                                        <div class="number">
+                                            <%="**** **** **** " + @default_card_information.last4%>
+                                        </div>
+                                        <div class="expiration-date">
+                                            <div class="expiration-date-title">
+                                                有効期限
+                                            </div>
+                                            <div class="expiration-date-info">
+                                                <%=@exp_month + " / " + @exp_year%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%= link_to("削除する",delete_card_index_path, method: :post, class: "destroy__function__link__btn") %>
+                            </div>                  
+                        </div>
+                    </div> 
+                    <div class="col-xs-12 top-button">
+                        <a href="/" class="">
+                            トップページに戻る
+                        </a>
+                    </div>                    
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

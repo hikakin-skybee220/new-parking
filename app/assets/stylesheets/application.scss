@@ -98,6 +98,16 @@ ul{
 .border-bottom{
     border-bottom: 1px solid rgba(0, 0, 0, 0.7);
 }
+.d-flex{
+    display: flex;
+}
+.must-check {
+    color: white;
+    background-color: #ce48b7;
+    padding: 4px;
+    border-radius: 11px;
+    margin-left: 4px;
+}
 
 .notice {
     color: white;
@@ -465,7 +475,7 @@ ul{
     
 
     // PARKING CONFIRMATIONS PUR-INDEX
-    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1{
+    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .card-show-sct1, .card-new-sct1{
         .pr-md-ad{
             margin: 25px 0;
             padding: 0 18%;
@@ -481,7 +491,8 @@ ul{
                 background-color: #e8e8e8b0;
                 box-shadow: rgba(0,0,0,0.12) 0 2px 5px;
                 border-radius: 5px;
-                padding: 20px;                
+                padding: 20px;       
+                margin-bottom: 40px;         
                 .subject{
                     margin: 20px 20px 30px;
                 }
@@ -570,6 +581,114 @@ ul{
         div#pr-start-price {
             margin: 30px 0 10px;
             text-align: center;
+        }
+    }
+
+    // CARD-NEW
+    #card-new-sct1{
+        .card-add {
+            padding: 0 130px;
+            .number-details {
+                margin: 7px 0;
+                .card-number {
+                    text-align: left;
+                    font-weight: bold;
+                }
+            }
+            #card_number {
+                width: 100%;
+                height: 40px;
+            }
+            .brand-image{
+                img.brand-logo {
+                    width: 10%;
+                }
+            }
+            .expirationdate {
+                margin: 10px 0;
+                .expirationdate-details {
+                    margin: 7px 0;
+                    .date {
+                        text-align: left;
+                        font-weight: bold;
+                    }
+                }
+                .expirationdate-choice{
+                    .month{
+                        width: 50%;
+                        align-items: center;     
+                        select#exp_month {
+                            width: 80%;
+                            height: 36px;
+                        }
+                        .month-detail {
+                            font-size: 18px;
+                            padding-left: 5px;
+                        }                   
+                    }
+                    .year {
+                        width: 50%;
+                        align-items: center;
+                        select#exp_year {
+                            width: 80%;
+                            height: 36px;
+                        }
+                        .year-detail {
+                            font-size: 18px;
+                            padding-left: 5px;
+                        }
+                    }
+                }
+            }
+            .securitycode{
+                .securitycode-details{
+                    margin: 7px 0;
+                    .securitycode-title{
+                        text-align: left;
+                        font-weight: bold;
+                    }
+                }
+                .securitycode-cardsecurity{
+                    input#cvc {
+                        width: 100%;
+                        height: 36px;
+                    }
+                }
+            }
+        }
+    }
+
+    // CARD-SHOW
+    #card-show-sct1{
+        .d-flex{
+            display: flex;
+            align-items: center;
+            .card-info{
+                display: flex;
+                align-items: center;
+                border: 2px solid #be62d0;
+                border-radius: 20px;
+                padding: 5px 10px 5px 30px;
+                .card-info-brand{
+                    width: 25%;
+                    height: max-content;
+                }
+                .card-info-numbers{
+                    width: 74%;
+                    font-size: 18px;
+                }
+            }
+            a.destroy__function__link__btn {
+                border: 1px solid #e22559;
+                color: #e22559;
+                padding: 14px 25px;
+                font-weight: bold;
+                border-radius: 33px;
+                &:hover {             
+                    color: #fff;           
+                    background-color: #e22559;
+                }   
+            }
         }
     }
 
