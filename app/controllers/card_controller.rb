@@ -1,16 +1,15 @@
 class CardController < ApplicationController
   require "payjp"
+  before_action :pay_alert
 
   def new
     @card = Card.where(user_id: current_user.id)
-    redirect_to action: "show" if @card.exists?
+    redirect_to controller: "users/registrations" ,action: "show" if @card.exists?
   end
 
   def pay #payjpとCardのデータベース作成を実施します。
     Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
-    if params['payjp-token'].blank?
-      redirect_to action: "new", alert: "クレジットカードを登録できませんでした。"
-    else
+    if params['payjp-token']
       customer = Payjp::Customer.create(
       description: '登録テスト', #なくてもOK
       email: current_user.email, #なくてもOK
@@ -18,11 +17,43 @@ class CardController < ApplicationController
       metadata: {user_id: current_user.id}
       ) #念の為metadataにuser_idを入れましたがなくてもOK
       @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
-      if @card.save
-        redirect_to action: "show"
+      if @card.save        
+        redirect_to controller: "users/registrations" ,action: "show"
       else
         redirect_to action: "pay"
       end
+    elsif params['payjp-token-for-new-account']
+      customer = Payjp::Customer.create(
+      description: '登録テスト', #なくてもOK
+      email: current_user.email, #なくてもOK
+      card: params['payjp-token-for-new-account'],
+      metadata: {user_id: current_user.id}
+      ) #念の為metadataにuser_idを入れましたがなくてもOK
+      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
+      if @card.save
+        redirect_to("/purchase/index")
+      else
+        redirect_to action: "pay"
+      end
+    elsif params['payjp-token-for-reservation']
+      customer = Payjp::Customer.create(
+      description: '登録テスト', #なくてもOK
+      email: current_user.email, #なくてもOK
+      card: params['payjp-token-for-reservation'],
+      metadata: {user_id: current_user.id}
+      ) #念の為metadataにuser_idを入れましたがなくてもOK
+      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
+      if @card.save
+        redirect_to("/reserves/show")
+      else
+        redirect_to action: "pay"
+      end
+    elsif params['payjp-token'].blank? && params[:commit]
+      redirect_to action: "new", alert: "クレジットカードを登録できませんでした。"
+    elsif params['payjp-token-for-new-account'].blank? && params[:new_account_commit]
+      redirect_to  controller: :purchase, action: :index, alert: "クレジットカードを登録できませんでした。"
+    elsif params['payjp-token-for-reservation'].blank? && params[:reservation_commit]
+      redirect_to  controller: :reserves, action: :show, alert: "クレジットカードを登録できませんでした。"
     end
   end
 
@@ -39,7 +70,7 @@ class CardController < ApplicationController
         redirect_to("/")
         flash[:notice] = "削除しました。"
       else
-        redirect_to action: "show", alert: "削除できませんでした。"
+        redirect_to controller: "users/registrations" ,action: "show", alert: "削除できませんでした。"
       end
     end
       
@@ -60,15 +91,15 @@ class CardController < ApplicationController
       when "Visa"
         # 例えば、Pay.jpからとってきたカード情報の、ブランドが"Visa"だった場合は返り値として
         # (画像として登録されている)Visa.pngを返す
-        @card_src = "visa.png"
+        @card_src = "logo_visa.gif"
       when "JCB"
         @card_src = "jcb.png"
       when "MasterCard"
-        @card_src = "master.png"
+        @card_src = "logo_mastercard.gif"
       when "American Express"
-        @card_src = "amex.png"
+        @card_src = "american_express.png"
       when "Diners Club"
-        @card_src = "diners.png"
+        @card_src = "diners_club.png"
       when "Discover"
         @card_src = "discover.png"
       end

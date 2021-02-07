@@ -1,43 +1,44 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%#=TOP%>
+  <div class="section container-fluid dev-reg-edit-sct1" id="dev-reg-edit-sct1">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12 wrapper text-center pr-md-ad">
+                  <div class="m-ad pr-bg" id="pr-start-top">
+                      <h2 class="pb-2per border-bottom subject">登録情報</h2>
+                      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                        <%= render "devise/shared/error_messages", resource: resource %>
+                        <ul class="text-left">
+                            <li>
+                                <span class="left">名前</span>
+                                <span class="right">
+                                  <%= f.text_field :name,  class: "field-area" %>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="left">メールアドレス</span>
+                                <span class="right">
+                                  <%= f.email_field :email, autocomplete: "email", class: "field-area" %>                                  
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="actions edit-btn">
+                          <%= f.submit "変更する" ,class: "edit_link_btn" %>
+                        </div>
+                        <div class="field-memory-login">
+                          <%= link_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "本当に削除してよろしいですか？" }, method: :delete %>
+                        </div>
+                      <% end %>
+                  </div> 
+                  <div class="col-xs-12 top-button">
+                      <a href="/" class="">
+                          トップページに戻る
+                      </a>
+                  </div>                    
+              </div>            
+          </div>
+      </div>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+    
+    

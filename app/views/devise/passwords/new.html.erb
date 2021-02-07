@@ -1,16 +1,22 @@
-<h2>Forgot your password?</h2>
+<div class="section container-fluid dev-pass-new-sct1" id="dev-pass-new-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center">
+                  <div class="pr-md-ad">
+                    <h2>パスワードをお忘れでしたらメールを送って再設定ができます。</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+                    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+                      <%= render "devise/shared/error_messages", resource: resource %>
+                      <div class="field">
+                        <div class="control-label text-left" for="">メールアドレス</div>
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-area" %>
+                      </div>
+                      <div class="actions">
+                        <%= f.submit "再設定用メールを送信する" %>
+                      </div>
+                    <% end %> 
+                  </div>                                               
+                </div>            
+            </div>
+        </div>
+    </div>

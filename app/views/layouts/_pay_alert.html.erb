@@ -1,0 +1,24 @@
+<% if @non_pay_user && @non_pay_user.finish_on %>
+    <div class="header-alert bgc-park">
+        <div class="header-alert-wrapper">
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>前回のご利用のお支払いがまだ完了していないようです
+                <%= link_to "/purchase/index" do %>
+                    <i class="fas fa-arrow-right"></i>支払い画面に行く
+                <% end %>
+            </p>
+        </div>
+    </div>
+<% end %>
+<% if @non_pay_reserve_user %>
+    <div class="header-alert bgc-reserve">
+        <div class="header-alert-wrapper">
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>予約利用のお支払いがまだ完了していないようです
+                <%= link_to "/reserves/show" do %>
+                    <i class="fas fa-arrow-right"></i>支払い画面に行く
+                <% end %>
+            </p>
+        </div>
+    </div>
+<% end %>

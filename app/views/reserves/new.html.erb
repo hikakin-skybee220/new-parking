@@ -1,0 +1,77 @@
+<%#=TOP%>
+    <div class="section container-fluid res-new-sct1" id="res-new-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <%= form_for @reserve, url: {controller: 'reserves', action:'create' } do |f| %>
+                        <div class="row m-ad pr-bg" id="pr-start-top">
+                            <div class="col-md-6">
+                                <label class="control-label" for="">利用開始時刻</label>
+                                <%= f.datetime_field :start_on, class: 'form-control', required: true, min: Date.current %>
+                            </div>     
+                            <div class="col-md-6">
+                                <label class="control-label" for="">利用終了時刻</label>
+                                <%= f.datetime_field :finish_on, class: 'form-control', id: "finishTime" ,required: true, min: Date.current %>
+                            </div>     
+                            <div class="black-opa">予約する日時を指定してください</div>
+                            <div class="parking-description-list black-opa">
+                                <ul class="parking-description-inner">
+                                    <li>※ 100円 / h 、最大400円です。</li>
+                                    <li>※ 自転車の出入りがあるため、白線内に駐車をお願いします。</li>
+                                    <li>※ 他の利用者の予約と被らない日時を設定してください。</li>
+                                </ul>
+                            </div>
+                            <% if @now_reserve_user.blank? && @reserve_users.blank? %>
+                            <% else %>
+                                <div class="list">
+                                    <h2 class="subject">この駐車場の予約状況</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="start-head">利用開始日</th>
+                                                <th class="finish-head">利用終了日</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-left">
+                                            <% if @now_reserve_user %>
+                                                <tr>
+                                                <td class="start"><%= @now_reserve_user.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                <td class="finsih"><%= @now_reserve_user.finish_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                            </tr>
+                                            <% end %>
+                                            <% @reserve_users.each do |f| %>
+                                                <tr>
+                                                    <td class="start"><%= f.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                    <td class="finsih"><%= f.finish_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <% end %>
+                        </div>
+                        <%#div class="col-xs-12" id="pr-start-price">
+                            <div class="pr-start-price-inner">
+                                <div class="pr-label d-none">
+                                    予定金額
+                                </div>
+                                <div class="pr-display">
+                                    ¥400(税込)
+                                </div>
+                            </div>
+                        </=div%>               
+
+                        <div class="col-xs-12 pr-button">                            
+                            <%= f.button :type => "submit" do %>
+                                利用申請する                                
+                            <% end %>                                         
+                        </div>
+                    <% end %>
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

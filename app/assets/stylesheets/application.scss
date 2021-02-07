@@ -51,6 +51,7 @@
 }
 a{
     color: white;
+    transition: .2s;
 }
 
 a:hover{
@@ -135,6 +136,15 @@ ul{
     transform: translate(-50%);
     left: 50%;
 }
+.reserve-alert{
+    position: initial;
+    width: 80%;
+    margin: 5px auto;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 0;   
+    transform: initial; 
+}
  
 
  
@@ -149,6 +159,29 @@ ul{
     header{
         border-bottom: 1px solid #00000040;
         .header{
+            .header-alert {
+                padding: 5px 0;                                
+                border-bottom: 1px solid #00000040;
+                .header-alert-wrapper {
+                    padding: 0 0 0 34px;
+                    p {
+                        margin: 0 0;
+                        a{
+                            color: red;
+                            padding-left: 10px;
+                            .fa-arrow-right{
+                                padding-right: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+            .bgc-park{
+                background-color: #4ff197c4;
+            }
+            .bgc-reserve{
+                background-color: #452dcac4;
+            }
             .header-inner{
                 display: flex;
                 justify-content: space-between;
@@ -192,15 +225,15 @@ ul{
     }
 
     // HOME INDEX
-    #sct0{
+    #sct0, #sct01{
         .bg{
-            height: 756px;            
+            height: 696px;            
         }
     }
 
-    #sct1{
+    #sct1, #sct1-1{
         color: $white;
-        padding: 378px 0 0 0;
+        padding: 378px 0 108px 0;
         .top-title{
             margin-bottom: 40px;
             .main{
@@ -214,23 +247,30 @@ ul{
         .m-ad{
             margin: 0px 260px;
             a{
-                
-            }
-            p{                
-                margin: 0 0 10px;
-                border: 1px solid white;
-                padding: 15px;
-                font-size: 16px;
-                &:hover{
-                    background-color: rgba(255, 255, 255, 0.201);
+                p{                
+                    margin: 0 0 10px;
+                    border: 1px solid white;
+                    padding: 15px;
+                    font-size: 16px;
+                    &:hover{
+                        background-color: rgba(255, 255, 255, 0.201);
+                    }
+                }                
+                &:focus{
+                    color: white;
+                    text-decoration: none;
                 }
+            }
+            .reserve-button {
+                width: 310px;
+                margin: 0 auto;
             }
         }
 
     }
 
     #sct2{
-        padding: 178px 0 0 0;
+        padding: 58px 0 0 0;
         .price-box{
             margin: 50px 230px;
             padding: 23px 0;
@@ -474,8 +514,9 @@ ul{
     }
     
 
-    // PARKING CONFIRMATIONS PUR-INDEX
-    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .card-show-sct1, .card-new-sct1{
+    // PARKING CONFIRMATIONS PUR-INDEX-HISTORY-DONE 
+    // CARD-NEW RES-NEW-SHOW-DONE REG-EDIT-SHOW
+    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .pur-his-sct1, .dev-reg-show-sct1, .card-new-sct1, .res-new-sct1, .res-show-sct1, .res-done-sct1, .dev-reg-edit-sct1{
         .pr-md-ad{
             margin: 25px 0;
             padding: 0 18%;
@@ -492,7 +533,7 @@ ul{
                 box-shadow: rgba(0,0,0,0.12) 0 2px 5px;
                 border-radius: 5px;
                 padding: 20px;       
-                margin-bottom: 40px;         
+                margin: 30px 0 40px;       
                 .subject{
                     margin: 20px 20px 30px;
                 }
@@ -512,7 +553,7 @@ ul{
                     margin: 30px 20px;
                     text-align: left;
                     line-height: 1.6;
-                }
+                }                
             }
             div#pr-start-price {
                 margin: 20px;
@@ -561,31 +602,199 @@ ul{
         }
     }
 
-    // PUR-INDEX
-    #pur-ind-sct1{
+    // RES-NEW PARKING-START
+    #res-new-sct1, #pr-sct1{
+        .parking-description-list{
+            padding-bottom: 20px;
+        }
+        .list {
+            margin: 0 100px 20px;
+            background-color: white;
+            border: 1px solid #dce4e9;
+            color: #333333;
+            max-height: 500px;
+            .subject{
+                font-size: 24px;
+                margin: initial !important;
+                padding: 20px 0 20px;
+                color: #4e7fc7;
+            }
+            table {
+                margin: 0 auto;
+                width: 75%;
+                th.start-head {
+                    padding: 0 0 0 41px;
+                    font-size: 16px;
+                }
+                th.finish-head {
+                    padding: 0 41px 0 0;
+                    float: right;
+                    font-size: 16px;
+                }
+                tbody{
+                    font-size: 14px;
+                    td{
+                        border-bottom: 1px solid #bbbbbb;
+                    }
+                    td.start{                        
+                        padding: 10px 0 10px 16px;
+                    }
+                    td.finsih {
+                        padding: 10px 0 10px 80px;
+                    }
+                    tr:last-child td{
+                        border-bottom: none;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    // PUR-INDEX RES-SHOW
+    #pur-ind-sct1 ,#res-show-sct1{
         .flash-text{
             border-left: 8px solid #a7ff9d;
         }
-        .pur-ind-top-button{
-            border: 1px solid #556b3f;
-            color: #556b3f;
-            &:hover {             
-                color: #fff;           
-                background-color: #556b3f;
-            }       
+        .pr-start-price-inner{
+            border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+        }
+        .card-wrapper.d-flex{      
+            margin: 20px 0;      
+            align-items: center;
+            .card-info-title {
+                font-weight: bold;
+                font-size: 16px;
+                width: 40%;
+            }
+            .card-info{
+                display: flex;
+                align-items: center;
+                border: 2px solid #be62d0;
+                border-radius: 20px;
+                padding: 5px 10px 5px 30px;
+                .card-info-brand{
+                    width: 25%;
+                    height: max-content;
+                }
+                .card-info-numbers{
+                    width: 74%;
+                    font-size: 18px;
+                }
+            }
+        }        
+        .top-button{
+            margin: 40px 0;
+            a {                    
+                border: 1px solid #3ea4af;
+                color: #3ea4af;
+                padding: 16px 25px;
+                font-weight: bold;
+                border-radius: 5px;   
+                &:hover {
+                    color: #fff;
+                    background-color: #3ea4af;
+                }               
+            }
+            #payjp_checkout_box input {
+                border: 1px solid #653f6b;
+                color: #653f6b;
+                padding: 14px 25px;
+                font-weight: bold;
+                border-radius: 5px;
+                background-image: none;
+                background-color: white;
+                font-weight: bold;
+                font-size: 14px;
+                &:hover {
+                    color: #fff;
+                    background-color: #653f6b;
+                }    
+            }
+        }
+        .m-ad{
+            margin: 54px 0;
         }
     }
 
     // PUR-DONE
-    #pur-done-sct1{
+    #pur-done-sct1 , #res-done-sct1{
         div#pr-start-price {
             margin: 30px 0 10px;
             text-align: center;
         }
     }
 
+    // PUR-HISTORY
+    #pur-his-sct1{
+        .list{
+            padding: 20px 0;
+            .fs{
+                font-size: 18px;
+            }
+            .button-wrapper{
+                margin: 0 100px;
+                .col-xs-6{
+                    padding: 45px 0 30px;
+                    a{
+                        color: white;
+                        background-color: #653f6b;
+                        padding: 14px 50px;
+                        font-weight: bold;
+                        border-radius: 5px;
+                        &:hover{
+                            color: #653f6b;
+                            background-color: white;
+                            border: 1px solid #653f6b;
+                        }
+                    }
+                    .reserve-button {
+                        padding: 14px 70px;
+                    }
+                }
+            }
+            table{
+                width: 90%;
+                margin: 0 auto;
+                thead{
+                    font-size: 16px;
+                    .start-head {
+                        padding-left: 40px;
+                    }
+                }
+                tbody{
+                    td {
+                        border-bottom: 1px solid #bbbbbb;
+                        padding: 24px 0 15px;
+                        color: #424242;                        
+                    }
+                    .style div{                        
+                        display: inline;                        
+                        color: white;
+                        padding: 6px 13px;
+                        font-weight: bold;
+                    }
+                    .reserve-style{
+                        margin-left: 20px;
+                        background-color: #8d4698;
+                    }
+                    .park-style{
+                        margin-left: 15px;
+                        background-color: #1e9aa0;
+                    }
+                    .start{
+                        padding-left: 40px;
+                    }
+                }
+                tr:last-child td{
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+
     // CARD-NEW
-    #card-new-sct1{
+    #card-new-sct1, #purchase-new-account-modal{
         .card-add {
             padding: 0 130px;
             .number-details {
@@ -598,6 +807,7 @@ ul{
             #card_number {
                 width: 100%;
                 height: 40px;
+                font-size: 18px;
             }
             .brand-image{
                 img.brand-logo {
@@ -605,7 +815,7 @@ ul{
                 }
             }
             .expirationdate {
-                margin: 10px 0;
+                margin: 15px 0;
                 .expirationdate-details {
                     margin: 7px 0;
                     .date {
@@ -620,6 +830,7 @@ ul{
                         select#exp_month {
                             width: 80%;
                             height: 36px;
+                            font-size: 18px;
                         }
                         .month-detail {
                             font-size: 18px;
@@ -632,6 +843,7 @@ ul{
                         select#exp_year {
                             width: 80%;
                             height: 36px;
+                            font-size: 18px;
                         }
                         .year-detail {
                             font-size: 18px;
@@ -641,6 +853,7 @@ ul{
                 }
             }
             .securitycode{
+                padding: 10px 0;
                 .securitycode-details{
                     margin: 7px 0;
                     .securitycode-title{
@@ -652,16 +865,70 @@ ul{
                     input#cvc {
                         width: 100%;
                         height: 36px;
+                        font-size: 18px;
                     }
+                }
+            }
+            .submit{
+                margin: 20px 0 0 0 ;
+                input#token_submit , input#token_submit_for_new_account, input#token_submit_for_reservation{ //クレジットカード入力モーダルの登録ボタン
+                    border: 1px solid #1a9dd0;
+                    color: white;
+                    background-color: #1a9dd0;
+                    padding: 14px 40px;
+                    font-weight: bold;
+                    border-radius: 33px;
+                    font-size: 18px;
                 }
             }
         }
     }
 
-    // CARD-SHOW
-    #card-show-sct1{
+    // REG-EDIT-SHOW
+    #dev-reg-show-sct1, .dev-reg-edit-sct1{
+        .pr-bg {
+            color: #653f6b;
+            .subject {
+                font-weight: bold;
+                border-bottom: 2px solid #653f6b;
+            }
+            ul li {
+                display: flex;                
+                margin: 16px auto;
+                width: 70%;
+                font-size: 18px;
+                border-bottom: 1px solid #653f6b;
+                padding: 5px 0;
+                .left {
+                    width: 40%;                    
+                    padding-left: 10px;
+                    // line-height: 41px;
+                }
+                .right{
+                    width: 60%;
+                    font-weight: bold;
+                }
+            }
+            .edit-btn{
+                margin: 46px 0 23px;
+                .edit_link_btn {
+                    color: #fff;
+                    background-color: #653f6b;
+                    padding: 10px 20px;                    
+                    border: 1px solid #653f6b;
+                    font-size: 18px;
+                    &:hover {
+                        color: #653f6b;
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+        .m-ad{
+            margin: 20px 50px;
+        }
         .d-flex{
-            display: flex;
+            margin: 50px 52px;
             align-items: center;
             .card-info{
                 display: flex;
@@ -678,6 +945,13 @@ ul{
                     font-size: 18px;
                 }
             }
+            .card-info-none{
+                font-size: 16px;
+                .card-info-none-span {
+                    font-weight: bold;
+                    padding-left: 5px;
+                }
+            }
             a.destroy__function__link__btn {
                 border: 1px solid #e22559;
                 color: #e22559;
@@ -692,8 +966,40 @@ ul{
         }
     }
 
-    // LOGIN
-    #lg-sct1, #lg-sct2, #lg-sct3{
+    // REG-EDIT
+    #dev-reg-edit-sct1{
+        ul li {
+            .left {
+                width: 40%;                    
+                padding-left: 10px;
+                line-height: 55px;
+            }
+            .right{
+                width: 60%;
+                font-weight: bold;                
+                line-height: 55px;
+                display: flex;
+                align-items: center;
+                .field-area{
+                    width: 90%;                    
+                    padding: 0px 0 0px 5px;
+                    height: 39px;
+                }
+            }
+        }
+        .field-memory-login{
+            margin: 0 0 10px 0;  
+            a {
+                color: #653f6b;
+                &:hover{
+                    color: hsla(292, 26%, 33%, 0.605);
+                }
+            } 
+        }
+    }
+
+    // LOGIN PASS-NEW-EDIT CONFI-NEW
+    #lg-sct1, #lg-sct2, #lg-sct3, .dev-pass-new-sct1, .dev-confi-new-sct1, .dev-pass-edit-sct1{
         a{
             color: $black;
             &:hover{
@@ -821,8 +1127,8 @@ ul{
         position: fixed;
         left: 0;
     }
-    .user-select-modal-wrapper , .parking-finish-modal-wrapper{
-        .user-select-modal-content , .parking-finish-modal-content{
+    .user-select-modal-wrapper , .parking-finish-modal-wrapper, .purchase-new-account-modal-wrapper{
+        .user-select-modal-content , .parking-finish-modal-content, .purchase-new-account-modal-content{
             display: none;/* 初期状態 */
             position: fixed;
             top: 0;

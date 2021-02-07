@@ -7,6 +7,7 @@
                     <h2>ログイン</h2>
 
                     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                      <%= render "devise/shared/error_messages", resource: resource %>
                       <div class="field">
                         <div class="control-label text-left" for="">メールアドレス</div>
                         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-area" %>
@@ -19,7 +20,7 @@
 
                       <% if devise_mapping.rememberable? %>
                         <div class="field-memory-login text-left">
-                          <a href="/users/password/new">パスワードをお忘れですか？</a>
+                          <a href="/passwords/new">パスワードをお忘れですか？</a>
                         </div>
                       <% end %>
 
