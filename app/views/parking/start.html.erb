@@ -4,14 +4,14 @@
             <div class="row">
                 <div class="col-xs-12 wrapper text-center pr-md-ad">
                     <%= form_for @parking, url: parking_create_path do |f| %>
-                        <div class="row d-flex m-ad pr-bg" id="pr-start-top">
+                        <div class="row m-ad pr-bg" id="pr-start-top">
                             <div class="col-md-6">
                                 <label class="control-label" for="">利用開始時刻</label>
                                 <%= f.text_field :start_on, class: 'form-control', placeholder:@timedisplay, readonly: true%>
                             </div>     
                             <div class="col-md-6">
                                 <label class="control-label" for="">利用終了予定時刻</label>
-                                <%= f.datetime_field :finish_on_schedule, class: 'form-control', id: "finishTime" ,required: true%>
+                                <%= f.datetime_field :finish_on_schedule, class: 'form-control', id: "finishTime" ,required: true, min: Date.current%>
                             </div>     
                             <div class="black-opa">利用時間を指定してください</div>
                             <div class="parking-description-list black-opa">
@@ -21,6 +21,34 @@
                                     <li>※ 直近の予約の時間よりも前に利用終了予定時刻を設定してください。</li>
                                 </ul>
                             </div>
+                            <% if @now_reserve_user.blank? && @reserve_users.blank? %>
+                            <% else %>
+                                <div class="list">
+                                    <h2 class="subject">予約状況</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="start-head">利用開始日</th>
+                                                <th class="finish-head">利用終了日</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-left">
+                                            <% if @now_reserve_user %>
+                                                <tr>
+                                                <td class="start"><%= @now_reserve_user.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                <td class="finsih"><%= @now_reserve_user.finish_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                            </tr>
+                                            <% end %>
+                                            <% @reserve_users.each do |f| %>
+                                                <tr>
+                                                    <td class="start"><%= f.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                    <td class="finsih"><%= f.finish_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <% end %>
                         </div>
                         <%#div class="col-xs-12" id="pr-start-price">
                             <div class="pr-start-price-inner">

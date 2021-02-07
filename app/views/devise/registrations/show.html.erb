@@ -1,0 +1,72 @@
+
+
+<%#=TOP%>
+    <div class="section container-fluid dev-reg-show-sct1" id="dev-reg-show-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">登録情報</h2>
+                        <ul class="text-left">
+                            <li>
+                                <span class="left">名前</span>
+                                <span class="right"><%= current_user.name %></span>
+                            </li>
+                            <li>
+                                <span class="left">メールアドレス</span>
+                                <span class="right"><%= current_user.email %></span>
+                            </li>
+                        </ul>
+                        <div class="edit-btn">
+                            <%= link_to("編集", edit_user_registration_path, class: "edit_link_btn") %>
+                        </div>
+                    </div> 
+                    <div class="my-20 row d-flex">
+                        <% if @card %>
+                            <div class="col-xs-7 fs left">   
+                                <div class="card-info">
+                                    <div class="card-info-brand">
+                                        <img src="/cards/<%=@card_src%>" alt="クレジットカードブランド情報">
+                                    </div>
+                                    <div class="card-info-numbers">
+                                        <div class="number">
+                                            <%="**** **** **** " + @default_card_information.last4%>
+                                        </div>
+                                        <div class="expiration-date">
+                                            <div class="expiration-date-title">
+                                                有効期限
+                                            </div>
+                                            <div class="expiration-date-info">
+                                                <%=@exp_month + " / " + @exp_year%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class="col-xs-5 fs right">
+                                <%= link_to("削除する",delete_card_index_path, method: :post, class: "destroy__function__link__btn") %>
+                            </div>                  
+                        <% else %>
+                            <div class="col-xs-7 fs left">   
+                                <div class="card-info-none">
+                                    クレジットカード情報 :<span class="card-info-none-span">未登録</span>
+                                </div>
+                            </div>        
+                            <div class="col-xs-5 fs right">
+                                <%= link_to("登録する",new_card_path,class: "destroy__function__link__btn") %>
+                            </div>    
+                        <% end %>
+                    </div>
+                    <div class="col-xs-12 top-button">
+                        <a href="/" class="">
+                            トップページに戻る
+                        </a>
+                    </div>                    
+                </div>            
+            </div>
+        </div>
+    </div>
+
+
+    
+    

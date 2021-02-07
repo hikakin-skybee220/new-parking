@@ -1,25 +1,35 @@
-<h2>Change your password</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="section container-fluid dev-pass-edit-sct1" id="dev-pass-edit-sct1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 wrapper text-center">
+              <div class="pr-md-ad">
+                <h2>パスワードを再設定する。</h2>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+                  <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+                  <div class="field">
+                        <div class="control-label text-left" for="">
+                          新しいパスワード
+                          <% if @minimum_password_length %>
+                          （<%= @minimum_password_length %>文字以上）
+                          <% end %>
+                        </div>
+                      
+                        <%= f.password_field :password, autocomplete: "new-password", class: "field-area" %>
+                      </div>                      
+                      <div class="field">
+                        <div class="control-label text-left" for="">パスワード（確認用）</div>
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "field-area" %>
+                      </div>
+                  <div class="actions">
+                    <%= f.submit "パスワードを変更する" %>
+                  </div>
+                <% end %> 
+              </div>                                               
+            </div>            
+        </div>
+    </div>
+</div>

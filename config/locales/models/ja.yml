@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      reserve: 予約
+    attributes:
+      reserve:
+        start_on: 利用開始時刻
+        finish_on: 利用終了時刻
+      park:
+        start_on: 利用開始時刻
+        finish_on_schedule: 利用終了予定時刻
