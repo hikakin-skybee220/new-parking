@@ -145,6 +145,25 @@ ul{
     padding: 10px 0;   
     transform: initial; 
 }
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
  
 
  
@@ -225,10 +244,10 @@ ul{
     }
 
     // HOME INDEX
-    #sct0, #sct01{
+    #sct0, #sct01{        
         .bg{
             height: 696px;            
-        }
+        }        
     }
 
     #sct1, #sct1-1{
@@ -270,6 +289,15 @@ ul{
     }
 
     #sct2{
+        @include pc {
+            background-color: red;
+          };
+          @include tab {
+            background-color: blue;
+          };
+          @include sp {
+            background-color: yellow;
+          };
         padding: 58px 0 0 0;
         .price-box{
             margin: 50px 230px;
@@ -517,6 +545,7 @@ ul{
     // PARKING CONFIRMATIONS PUR-INDEX-HISTORY-DONE 
     // CARD-NEW RES-NEW-SHOW-DONE REG-EDIT-SHOW
     #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .pur-his-sct1, .dev-reg-show-sct1, .card-new-sct1, .res-new-sct1, .res-show-sct1, .res-done-sct1, .dev-reg-edit-sct1{
+        min-height: 630px;
         .pr-md-ad{
             margin: 25px 0;
             padding: 0 18%;
