@@ -19,65 +19,67 @@
   </head>
 
   <body>
-
-    <header>
-      <div class="header default">
-        <%= render 'layouts/pay_alert' %>
-        <div class="header-inner">
-            <div class="header-logo">
-                <a href="/">
-                    <img src="/SHIMAHIKA PARKING.png" alt="ヘッダーロゴ">
-                </a>
-            </div>
-            <div class="header-menu">
-                <div class="header-menu-list">
-                    <ul class="header-menu-inner">
-                      <% if current_user %>
+    <div class="footerFixed">
+      <header>
+        <div class="header default">
+          <%= render 'layouts/pay_alert' %>
+          <div class="header-inner">
+              <div class="header-logo">
+                  <a href="/">
+                      <img src="/SHIMAHIKA PARKING.png" alt="ヘッダーロゴ">
+                  </a>
+              </div>
+              <div class="header-menu">
+                  <div class="header-menu-list">
+                      <ul class="header-menu-inner">
+                        <% if current_user %>
+                          <li>
+                              <%=link_to history_purchase_index_path, class: "login black" do %>
+                                <i class="fas fa-history header-menu-mark"></i>利用履歴
+                              <% end %>
+                          </li>
+                          <li>
+                              <%=link_to user_show_path, class: "login black" do %>
+                                <i class="fas fa-sign-in-alt header-menu-mark"></i>登録情報
+                              <% end %>
+                          </li>
+                        <% else %>
+                          <li>
+                              <a href="/login" class="login black">
+                                  <i class="fas fa-sign-in-alt header-menu-mark"></i>ログイン
+                              </a>
+                          </li>
+                        <% end %>
+                        <% if current_user %>
                         <li>
-                            <%=link_to history_purchase_index_path, class: "login black" do %>
-                              <i class="fas fa-history header-menu-mark"></i>利用履歴
-                            <% end %>
+                            <a href="/logout" class="new-account">ログアウト</a>
                         </li>
+                        <% else %>   
                         <li>
-                            <%=link_to user_show_path, class: "login black" do %>
-                              <i class="fas fa-sign-in-alt header-menu-mark"></i>登録情報
-                            <% end %>
+                            <a href="/signup" class="new-account">アカウント作成</a>
                         </li>
-                      <% else %>
-                        <li>
-                            <a href="/login" class="login black">
-                                <i class="fas fa-sign-in-alt header-menu-mark"></i>ログイン
-                            </a>
-                        </li>
-                      <% end %>
-                      <% if current_user %>
-                      <li>
-                          <a href="/logout" class="new-account">ログアウト</a>
-                      </li>
-                      <% else %>   
-                      <li>
-                          <a href="/signup" class="new-account">アカウント作成</a>
-                      </li>
-                      <% end %>
-                    </ul>
-                </div>
+                        <% end %>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </header>
+    <%= render 'layouts/notifications' %>
+    
+      <%= yield %>
+      <footer id="footer">
+        <div class="inner">
+            <div class="madeby">Made by Hikaru Shimada & Takafumi Noiri</div>
+            <div class="sns">
+                <p class="follow">Follow Me</p>
+                <a href="https://www.facebook.com/shimahika21/?ref=page_internal" target="_blank" rel="noopener noreferrer"><p class="facebook-foo sns-item-foo"><i class="fab fa-facebook-f"></i>Facebook</p></a>
+                <a href="https://twitter.com/Hikkar_skybee" target="_blank" rel="noopener noreferrer"><p class="twitter-foo sns-item-foo"><i class="fab fa-twitter"></i>Twitter</p></a>
             </div>
         </div>
-      </div>
-    </header>
-  <%= render 'layouts/notifications' %>
-  
-    <%= yield %>
-    <footer id="footer">
-    <div class="inner">
-        <div class="madeby">Made by Hikaru Shimada & Takafumi Noiri</div>
-        <div class="sns">
-            <p class="follow">Follow Me</p>
-            <a href="https://www.facebook.com/shimahika21/?ref=page_internal" target="_blank" rel="noopener noreferrer"><p class="facebook-foo sns-item-foo"><i class="fab fa-facebook-f"></i>Facebook</p></a>
-            <a href="https://twitter.com/Hikkar_skybee" target="_blank" rel="noopener noreferrer"><p class="twitter-foo sns-item-foo"><i class="fab fa-twitter"></i>Twitter</p></a>
-        </div>
+      </footer>
     </div>
-</footer>
+
 
   </body>
 

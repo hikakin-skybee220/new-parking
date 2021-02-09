@@ -51,15 +51,14 @@ class PurchaseController < ApplicationController
   def pay
     @user = current_user
     @path = Rails.application.routes.recognize_path(request.referer)
+    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']  
     if @path[:controller] == "purchase"
       @parking = Park.find_by(user_id: @user.id, finish_stamp: "no")
       @price = @parking.price
       if @user.card.present?
         # ログインユーザーがクレジットカード登録済みの場合の処理
         # ログインユーザーのクレジットカード情報を引っ張ってきます。
-        @card = Card.find_by(user_id: @user.id)
-        # 前前前回credentials.yml.encに記載したAPI秘密鍵を呼び出します。
-        Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']     
+        @card = Card.find_by(user_id: @user.id)                   
         #登録したカードでの、クレジットカード決済処理
         charge = Payjp::Charge.create(
         # 商品(product)の値段を引っ張ってきて決済金額(amount)に入れる

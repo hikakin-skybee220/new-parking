@@ -146,7 +146,7 @@ ul{
     transform: initial; 
 }
 $pc: 1024px; // PC
-$tab: 680px; // タブレット
+$tab: 768px; // タブレット
 $sp: 480px;  // スマホ
 
 @mixin pc {
@@ -246,11 +246,41 @@ $sp: 480px;  // スマホ
     // HOME INDEX
     #sct0, #sct01{        
         .bg{
-            height: 696px;            
+            height: 696px;     
+            .tab, .sp{
+                display: none;
+            }       
         }        
+        @include pc {
+            .bg{
+                height: 696px;            
+            }
+          };
+          @include tab {
+            .bg{
+                height: 611px;     
+                .pc{
+                    display: none;
+                }  
+                .tab{
+                    display: block;
+                }       
+            }
+          };
+          @include sp {
+            .bg{
+                height: 473px;     
+                .pc, .tab{
+                    display: none;
+                }  
+                .sp{
+                    display: block;
+                }       
+            }
+          };
     }
 
-    #sct1, #sct1-1{
+    #sct1, .sct1-1{
         color: $white;
         padding: 378px 0 108px 0;
         .top-title{
@@ -283,21 +313,36 @@ $sp: 480px;  // スマホ
             .reserve-button {
                 width: 310px;
                 margin: 0 auto;
+                p{                
+                    margin: 0 0 10px;
+                    border: none;
+                    background-color: #172a5b;
+                    padding: 15px;
+                    font-size: 16px;
+                    &:hover{
+                        background-color: #fff;
+                        color: #172a5b;
+                    }
+                }  
             }
         }
-
+        @include pc {
+            padding: 338px 0 63px 0;
+            .m-ad{
+                margin: 0 16%;
+            }
+          };
+    }
+    #sct1-1{
+        @include pc {
+            padding: 394px 0 94px 0;
+          };
+        @include tab(){
+            padding: 328px 0 76px 0;
+        }
     }
 
-    #sct2{
-        @include pc {
-            background-color: red;
-          };
-          @include tab {
-            background-color: blue;
-          };
-          @include sp {
-            background-color: yellow;
-          };
+    #sct2{        
         padding: 58px 0 0 0;
         .price-box{
             margin: 50px 230px;
@@ -329,6 +374,15 @@ $sp: 480px;  // スマホ
             font-weight: bold;
             color: #333333;
         }
+        @include pc {
+            .price-box{
+                margin: 50px;
+            }
+          };
+          @include tab {            
+          };
+          @include sp {            
+          };
     }
 
     #sct3{
@@ -380,6 +434,42 @@ $sp: 480px;  // スマホ
                 height: 575px;
             }  
         }
+        @include pc {
+            .relative{                        
+                img{
+                    position: absolute;
+                    width: 45%;
+                    height: 480px;
+                    right: 0;
+                }          
+                iframe.map {
+                    position: absolute;
+                    top: 125px;
+                    left: 2.5%;
+                    width: 50%;
+                    height: 525px;
+                }  
+            }
+          };
+          @include tab {    
+            .relative{                        
+                img{
+                    position: absolute;
+                    width: 60%;
+                    height: 480px;
+                    right: 0;
+                }          
+                iframe.map {
+                    position: absolute;
+                    top: 508px;
+                    left: 0%;
+                    width: 60%;
+                    height: 525px;
+                }  
+            }        
+          };
+          @include sp {            
+          };
     }
 
     #sct4{
@@ -390,6 +480,18 @@ $sp: 480px;  // スマホ
             line-height: 1.8;
             font-size: 18px;
             margin: 0 220px;
+        }
+        @include pc {
+            padding: 45px 0 0 0;
+            .notice-box{
+                margin: 0 0;
+            }
+        }
+        @include tab {
+            padding: 400px 0 0 0;
+            .notice-box{
+                margin: 0 0;
+            }
         }
     }
 
@@ -494,29 +596,40 @@ $sp: 480px;  // スマホ
                 }
             }
         }
+        @include tab {
+            padding: 100px 0 670px 0;
+            .notice-box{
+                margin: 0 0;
+            }
+        }
     }
 
     /* FOOTER */
+    .footerFixed{
+        min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+        position: relative;/* ←相対位置 */
+        padding-bottom: 60px; /* ←フッターの高さを指定 */
+        box-sizing: border-box;
+        /* ↑ヘッダーやフッターを含むすべての要素の高さ＝min-height:100vhになるように指定 */
+    }
     #footer{
+        position: absolute;/* ←絶対位置 */
+        bottom: 0;
         color: $black;
         border-top: 1px solid rgba(0, 0, 0, 0.201);
-        .inner{
-            position: relative;
-            padding: 35px 0;  
+        width: 100%;
+        .inner{            
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;  
             .madeby{
-                float: left;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%,-50%);
             }
             .sns{
                 display: flex;    
                 position: absolute;
                 top: 50%;
-                left: 95%;
-                transform: translate(-95%,-50%);
-                width: 243px;
+                right: 2%;
+                transform: translate(2%,-50%);                
                 .follow{
                     font-weight: bold;
                 }
@@ -528,6 +641,7 @@ $sp: 480px;  // スマホ
             }
         }
     }
+    
     
     #scroll_to_top {
         cursor: pointer;
@@ -544,8 +658,7 @@ $sp: 480px;  // スマホ
 
     // PARKING CONFIRMATIONS PUR-INDEX-HISTORY-DONE 
     // CARD-NEW RES-NEW-SHOW-DONE REG-EDIT-SHOW
-    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .pur-his-sct1, .dev-reg-show-sct1, .card-new-sct1, .res-new-sct1, .res-show-sct1, .res-done-sct1, .dev-reg-edit-sct1{
-        min-height: 630px;
+    #pr-sct1, #pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .pur-his-sct1, .dev-reg-show-sct1, .card-new-sct1, .res-new-sct1, .res-show-sct1, .res-done-sct1, .dev-reg-edit-sct1{        
         .pr-md-ad{
             margin: 25px 0;
             padding: 0 18%;
