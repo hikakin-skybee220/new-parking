@@ -181,6 +181,7 @@ GEM
     orm_adapter (0.5.0)
     payjp (0.0.7)
       rest-client (~> 2.0)
+    pg (1.2.3)
     popper_js (1.16.0)
     public_suffix (4.0.6)
     puma (4.3.7)
@@ -318,13 +319,14 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-twitter
   payjp
+  pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   sass-rails (>= 6)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3 (~> 1.4)
+  sqlite3
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
