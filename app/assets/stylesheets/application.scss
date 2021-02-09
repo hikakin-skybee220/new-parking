@@ -528,7 +528,7 @@ $sp: 480px;  // スマホ
                     border-top: 1px solid #fff;
                     border-bottom: 1px solid #fff;
                     position: absolute;
-                    top: 18px;
+                    top: 40px;
                     right: 18px;
                     content: "";
                     width: 57.4%;
@@ -557,7 +557,7 @@ $sp: 480px;  // スマホ
                     border-left: 1px solid #fff;
                     border-right: 1px solid #fff;
                     position: absolute;
-                    top: 18px;
+                    top: 40px;
                     right: 18px;
                     content: "";
                     width: 57.4%;
@@ -588,6 +588,7 @@ $sp: 480px;  // スマホ
                     width: 60%;
                     height: 620px;
                     right: 0;
+                    top: 20px;
                 }
                 .white-black{
                     opacity: 0;    
@@ -596,10 +597,95 @@ $sp: 480px;  // スマホ
                 }
             }
         }
+        @include pc {  
+            .relative{            
+                .surround{
+                    &::before{
+                        border-top: 1px solid #fff;
+                        border-bottom: 1px solid #fff;
+                        position: absolute;
+                        top: 40px;
+                        right: 8px;
+                        content: "";
+                        width: 58.4%;
+                        height: 580px;
+                        opacity: 0;
+                        transform: scale(0, 1);
+                        transition: opacity 0.35s, transform 0.35s;
+                        z-index: 20;
+                        
+                    }
+                    &::after{
+                        border-left: 1px solid #fff;
+                        border-right: 1px solid #fff;
+                        position: absolute;
+                        top: 40px;
+                        right: 8px;
+                        content: "";
+                        width: 58.4%;
+                        height: 580px;                  
+                        opacity: 0;
+                        transform: scale(1, 0);
+                        transition: opacity 0.35s, transform 0.35s;
+                        z-index: 12;
+                    }
+                }
+            }
+        }
         @include tab {
             padding: 100px 0 670px 0;
-            .notice-box{
-                margin: 0 0;
+            .relative{            
+                .surround{
+                    &::before{
+                        border-top: 1px solid #fff;
+                        border-bottom: 1px solid #fff;
+                        position: absolute;
+                        top: 37px;
+                        right: 18px;
+                        content: "";
+                        width: 64.4%;
+                        height: 550px;
+                        opacity: 0;
+                        transform: scale(0, 1);
+                        transition: opacity 0.35s, transform 0.35s;
+                        z-index: 20;
+                        
+                    }
+                    .sub-read{
+                        position: absolute;
+                        color: white;
+                        z-index: 99 !important;
+                        font-size: 60px;
+                        font-weight: bold;
+                        margin: 0 0;
+                        left: 75%;
+                        top: 261px;
+                        transform: translateX(-75%);
+                        transition: 0.35s;
+                        z-index: 10;
+                        opacity: 0;
+                    }
+                    &::after{
+                        border-left: 1px solid #fff;
+                        border-right: 1px solid #fff;
+                        position: absolute;
+                        top: 37px;
+                        right: 18px;
+                        content: "";
+                        width: 64.4%;
+                        height: 550px;                  
+                        opacity: 0;
+                        transform: scale(1, 0);
+                        transition: opacity 0.35s, transform 0.35s;
+                        z-index: 12;
+                    }     
+                    img{
+                        position: absolute;
+                        width: 70%;
+                        height: 580px;
+                        right: 0;
+                    }
+                }
             }
         }
     }

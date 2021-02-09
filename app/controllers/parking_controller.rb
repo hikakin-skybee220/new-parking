@@ -15,6 +15,7 @@ class ParkingController < ApplicationController
 
     @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
     @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
+    
 
   end
 
