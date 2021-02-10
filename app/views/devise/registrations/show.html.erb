@@ -23,7 +23,7 @@
                     </div> 
                     <div class="my-20 row d-flex">
                         <% if @card %>
-                            <div class="col-xs-7 fs left">   
+                            <div class="col-xs-8 col-sm-7 fs left">   
                                 <div class="card-info">
                                     <div class="card-info-brand">
                                         <img src="/cards/<%=@card_src%>" alt="クレジットカードブランド情報">
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                             </div>        
-                            <div class="col-xs-5 fs right">
+                            <div class="col-xs-4 col-sm-5 fs right">
                                 <%= link_to("削除する",delete_card_index_path, method: :post, class: "destroy__function__link__btn") %>
                             </div>                  
                         <% else %>

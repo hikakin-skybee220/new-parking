@@ -5,11 +5,11 @@
                 <div class="col-xs-12 wrapper text-center pr-md-ad">
                     <%= form_for @reserve, url: {controller: 'reserves', action:'create' } do |f| %>
                         <div class="row m-ad pr-bg" id="pr-start-top">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xs-12 form-control-wrapper">
                                 <label class="control-label" for="">利用開始時刻</label>
                                 <%= f.datetime_field :start_on, class: 'form-control', required: true, min: Date.current %>
                             </div>     
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xs-12 form-control-wrapper">
                                 <label class="control-label" for="">利用終了時刻</label>
                                 <%= f.datetime_field :finish_on, class: 'form-control', id: "finishTime" ,required: true, min: Date.current %>
                             </div>     

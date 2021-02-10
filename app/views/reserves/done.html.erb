@@ -9,24 +9,24 @@
                     <div class="m-ad pr-bg" id="pr-start-top">
                         <h2 class="pb-2per border-bottom subject">お支払い内容の確認</h2>
                         <div class="my-20 row">
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-4 fs fs-sp-label">
                                 利用開始時刻            
                             </div>        
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-8 fs fs-sp-time">
                                 <%=@reserve.start_on.strftime('%Y年%m月%d日 %H:%M')%>
                             </div>                  
                         </div>
                         <div class="my-20 row">
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-4 fs fs-sp-label">
                                 利用終了時刻            
                             </div>        
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-8 fs fs-sp-time">
                                 <%=@reserve.finish_on.strftime('%Y年%m月%d日 %H:%M')%>
                             </div>                  
                         </div>                        
                         <div class="" id="pr-start-price">
                             <div class="pr-start-price-inner">
-                                <div class="pr-label d-none">
+                                <div class="pr-label">
                                     お支払い金額
                                 </div>
                                 <div class="pr-display">
