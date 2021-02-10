@@ -1628,8 +1628,9 @@ x
 }
 
 @media screen and (max-width:500px){
-    .header nav {                       
-        margin-left: 15%;
+    .header nav {               
+        white-space: nowrap;
+        margin-left: 20%;
         margin-top: 20%; 
       }
       .header nav ul li {        

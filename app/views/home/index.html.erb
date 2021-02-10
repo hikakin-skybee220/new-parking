@@ -6,7 +6,7 @@
         <div class="bg">
             <img src="/top-bg2_optimized.png" alt="トップ背景画像" class="pc">
             <img src="/top-bg2_optimized_for_tab.png" alt="トップ背景画像" class="tab">
-            <img src="/top-bg2_optimized_for_sp.png" alt="トップ背景画像" class="sp">
+            <img src="/top-bg-sp_optimized.png" alt="トップ背景画像" class="sp">
         </div>
     </div>
     <%#=TOP%>
@@ -54,7 +54,7 @@
     </div>
     <div class="section" id="sct01">
         <div class="bg">
-            <img src="/reserve-bg3.png" alt="予約背景画像" class="pc-res">
+            <img src="/reserve-bg3_optimized.png" alt="予約背景画像" class="pc-res">
         </div>
     </div>
     <%#=TOP%>
@@ -136,8 +136,9 @@
                     <div class="notice-box">
                         <p>
                             駐車場前の道路は一方通行となっております。<br>
-                            国道122号線から駐車場に向けて走ることはできないのでご注意ください。<br>
-                            案内図を元にお越し頂きますようよろしくお願い致します。
+                            国道122号線から駐車場に向けて走ることは<br class="sp-none">
+                            できないのでご注意ください。<br>
+                            案内図を元にお越しください。
                         </p>
                     </div>
 
@@ -183,26 +184,24 @@
             <div class="parking-finish-modal-content">
                 <div class="overlay"></div>
                 <div class="modal finish-modal">
-                    <div class="conteiner text-center">
-                        <div class="row">
-                            <img src="/me-icon_optimized.png" alt="" class="up-icon">
-                            <% if @parking.blank? or @parking.finish_stamp == "yes" %>
-                                <div class="col-xs-12 text">
-                                    <div class="bold">何も利用していません。</div>                       
-                                </div>  
-                            <% elsif @parking.finish_stamp == "no" && @parking.finish_on.blank? %>  
-                                <div class="col-xs-12 text">
-                                    <div class="bold">利用終了を確定してよろしいですか？</div>
-                                    <p class="black-opa pt-2per">
-                                        利用終了確定時刻 : <%=@timedisplay%>
-                                    </p>                            
-                                </div>     
-                                <div class="col-xs-12 next-button">
-                                    <%= link_to("確定する",parking_finish_path, method: :post) %>
-                                </div>         
-                                                                                         
-                            <% end %>
-                        </div>
+                    <div class="conteiner text-center">                        
+                        <img src="/me-icon_optimized.png" alt="" class="up-icon">
+                        <% if @parking.blank? or @parking.finish_stamp == "yes" %>
+                            <div class="col-xs-12 text">
+                                <div class="bold">何も利用していません。</div>                       
+                            </div>  
+                        <% elsif @parking.finish_stamp == "no" && @parking.finish_on.blank? %>  
+                            <div class="col-xs-12 text">
+                                <div class="bold">利用終了を確定してよろしいですか？</div>
+                                <p class="black-opa pt-2per">
+                                    利用終了確定時刻 : <%=@timedisplay%>
+                                </p>                            
+                            </div>     
+                            <div class="col-xs-12 next-button">
+                                <%= link_to("確定する",parking_finish_path, method: :post) %>
+                            </div>         
+                                                                                        
+                        <% end %>
                     </div>
                 </div>
             </div>
@@ -214,32 +213,32 @@
         <div class="user-select-modal-content">
             <div class="overlay"></div>
             <div class="modal">
-                <div class="conteiner text-center">
-                    <div class="row">
-                        <img src="/me-icon_optimized.png" alt="" class="up-icon">
-                        <div class="col-xs-12 text">
-                            <div class="bold">利用方法を選択する</div>
-                            <p class="black-opa">
-                                いずれのご利用方法でもクレジットカードのご登録が必要になります。<br>
-                                アカウントを作成することで次回のご利用をスムーズにすることができます。
-                            </p>
-                        </div>                        
-                        <div class="col-xs-12 field up">
-                            <a href="/login" class="">
-                                <p class="form-for-area">ログイン</p>
-                            </a>
-                        </div>                                                
-                        <div class="col-xs-12 field up">     
-                            <a href="/signup" class="">
-                                <p class="form-for-area">アカウント作成</p>
-                            </a>
-                        </div>                        
-                        <%#div class="col-xs-6 field right">  
-                            <a href="/guest/signup" class="">
-                                <p class="form-for-area">ゲスト利用</p>
-                            </a>
-                        </#div%>                                                
-                    </div>
+                <div class="conteiner text-center">                    
+                    <img src="/me-icon_optimized.png" alt="" class="up-icon">
+                    <div class="col-xs-12 text">
+                        <div class="bold">利用方法を選択する</div>
+                        <p class="black-opa">
+                            いずれのご利用方法でもクレジットカードの<br class="sp-none">
+                            ご登録が必要になります。<br>
+                            アカウントを作成することで<br class="sp-none">
+                            次回のご利用をスムーズにすることができます。
+                        </p>
+                    </div>                        
+                    <div class="col-xs-12 field up">
+                        <a href="/login" class="">
+                            <p class="form-for-area">ログイン</p>
+                        </a>
+                    </div>                                                
+                    <div class="col-xs-12 field up">     
+                        <a href="/signup" class="">
+                            <p class="form-for-area">アカウント作成</p>
+                        </a>
+                    </div>                        
+                    <%#div class="col-xs-6 field right">  
+                        <a href="/guest/signup" class="">
+                            <p class="form-for-area">ゲスト利用</p>
+                        </a>
+                    </#div%>                                                                    
                 </div>
             </div>
         </div>

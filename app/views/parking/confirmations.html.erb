@@ -1,27 +1,27 @@
 <%#=TOP%>
-    <div class="section container-fluid" id="pr-con-sct1">
+    <div class="section container-fluid pr-con-sct1" id="pr-con-sct1">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 wrapper text-center pr-md-ad">
-                    <div class="flash-text">
+                    <div class="flash-text flash-text-pr-con">
                         利用申請が完了しました。<br>
                         終了時刻や鍵、白線内の駐車の確認をお願いします。
                     </div>
                     <div class="m-ad pr-bg" id="pr-start-top">
                         <h2 class="pb-2per border-bottom subject">利用内容</h2>
                         <div class="my-20 row">
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-4 fs fs-sp-label">
                                 利用開始時刻            
                             </div>        
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-8 fs fs-sp-time">
                                 <%=@parking.start_on.strftime('%Y年%m月%d日 %H:%M')%>
                             </div>                  
                         </div>
                         <div class="my-20 row">
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-4 fs fs-sp-label">
                                 利用終了予定時刻            
                             </div>        
-                            <div class="col-xs-6 fs">
+                            <div class="col-sm-6 col-xs-8 fs fs-sp-time">
                                 <%=@parking.finish_on_schedule.strftime('%Y年%m月%d日 %H:%M')%>
                             </div>                  
                         </div>
@@ -35,13 +35,11 @@
                     </div>
                     <div class="col-xs-12" id="pr-start-price">
                         <div class="pr-start-price-inner">
-                            <div class="pr-label d-none">
+                            <div class="pr-label">
                                 予定金額
                             </div>
                             <div class="pr-display">
                                 ¥<%=@price%>(税込)
-
-                           
                             </div>
                         </div>
                     </div>        

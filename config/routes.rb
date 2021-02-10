@@ -59,5 +59,6 @@ devise_for :users, controllers: {
   post "parking/create" => "parking#create"
   post "/parking_create" => "parking#parking_create"
   get '/' => "home#index"
+  root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
