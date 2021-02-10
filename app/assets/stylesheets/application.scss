@@ -923,8 +923,7 @@ $sp: 480px;  // スマホ
                 .fs {
                     font-size: 20px;
                 }
-                .col-md-6 {
-                    margin: 30px 0 30px;
+                .col-sm-6 {                    
                     .label{
                         font-size: 18px;
                     }
@@ -980,6 +979,46 @@ $sp: 480px;  // スマホ
                         color: #fff;
                         background-color: #653f6b;
                     }               
+                }
+            }
+        }
+        @include tab{
+            .pr-md-ad{                
+                padding: 0 7%;
+                .flash-text { 
+                    border-left: 8px solid #cc9dff;
+                    text-align: left;
+                    background-color: #fff;
+                    padding: 20px;
+                    box-shadow: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
+                    margin-bottom: 25px;
+                }
+                .pr-bg{    
+                    .form-control-wrapper{
+                        margin: 15px 0;
+                    }     
+                    .parking-description-list {
+                        margin: 30px 0;
+                        text-align: left;
+                        line-height: 1.6;
+                    }  
+                }
+                div#pr-start-price {
+                    margin: 20px 0;
+                }
+                .top-button{
+                    margin: 20px 0 40px;
+                    a {                    
+                        border: 1px solid #653f6b;
+                        color: #653f6b;
+                        padding: 14px 25px;
+                        font-weight: bold;
+                        border-radius: 5px;   
+                        &:hover {
+                            color: #fff;
+                            background-color: #653f6b;
+                        }               
+                    }
                 }
             }
         }
@@ -1280,6 +1319,23 @@ $sp: 480px;  // スマホ
                 }
                 tr:last-child td{
                     border-bottom: none;
+                }
+            }
+        }
+        @include tab{
+            .list{   
+                table{
+                    width: 96%;                     
+                    thead{                        
+                        .start-head {
+                            padding-left: 20px;
+                        }
+                    }
+                    tbody{
+                        .start{
+                            padding-left: 20px;
+                        }
+                    }
                 }
             }
         }
