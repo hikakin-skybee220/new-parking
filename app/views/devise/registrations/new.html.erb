@@ -8,8 +8,12 @@
                     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                       <%= render "devise/shared/error_messages", resource: resource %>
                       <div class="field">
+                        <div class="control-label text-left" for="">ユーザーネーム</div>
+                        <%= f.text_field :name, autofocus: true, class: "field-area" %>
+                      </div>
+                      <div class="field">
                         <div class="control-label text-left" for="">メールアドレス</div>
-                        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-area" %>
+                        <%= f.email_field :email, autocomplete: "email", class: "field-area" %>
                       </div>
                       <div class="field">
                         <div class="control-label text-left" for="">

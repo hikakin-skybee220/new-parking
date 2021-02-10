@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>Parking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>    
     <script type="text/javascript" src="https://js.pay.jp/"></script>    
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     
     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
     <!-- Fontawesome CSS -->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
@@ -19,8 +25,10 @@
   </head>
 
   <body>
-    <header>
-      <div class="header default">
+    <div class="footerFixed">
+      <header class="d-lg-block d-none">
+        <div class="header default">
+          <%= render 'layouts/pay_alert' %>
           <div class="header-inner">
               <div class="header-logo">
                   <a href="/">
@@ -29,12 +37,17 @@
               </div>
               <div class="header-menu">
                   <div class="header-menu-list">
-                      <ul class="header-menu-inner">
+                      <ul class="header-menu-inner ">
                         <% if current_user %>
                           <li>
-                              <a href="#" class="login black">
-                                  <i class="fas fa-sign-in-alt header-menu-mark"></i>設定
-                              </a>
+                              <%=link_to history_purchase_index_path, class: "login black" do %>
+                                <i class="fas fa-history header-menu-mark"></i>利用履歴
+                              <% end %>
+                          </li>
+                          <li>
+                              <%=link_to user_show_path, class: "login black" do %>
+                                <i class="fas fa-sign-in-alt header-menu-mark"></i>登録情報
+                              <% end %>
                           </li>
                         <% else %>
                           <li>
@@ -56,22 +69,84 @@
                   </div>
               </div>
           </div>
-      </div>
-  </header>
-  <%= render 'layouts/notifications' %>
-  
-    <%= yield %>
-    <footer id="footer">
-    <div class="inner">
-        <div class="madeby">Made by Hikaru Shimada</div>
-        <div class="sns">
-            <p class="follow">Follow Me</p>
-            <a href="https://www.facebook.com/shimahika21/?ref=page_internal" target="_blank" rel="noopener noreferrer"><p class="facebook-foo sns-item-foo"><i class="fab fa-facebook-f"></i>Facebook</p></a>
-            <a href="https://twitter.com/Hikkar_skybee" target="_blank" rel="noopener noreferrer"><p class="twitter-foo sns-item-foo"><i class="fab fa-twitter"></i>Twitter</p></a>
         </div>
-    </div>
-</footer>
+      </header>
 
+      <header class="header d-lg-none">   
+        <%= render 'layouts/pay_alert' %>
+          <div class="header-inner">
+              <div class="header-logo2 py-4">
+                  <a href="/">
+                      <img src="/SHIMAHIKA PARKING.png" class="w-30" alt="ヘッダーロゴ">
+                  </a>
+              </div>
+              <div class="header-menu">
+                  <div class="header-menu-list">
+                      <ul class="header-menu-inner ">
+                        <div class="hamburger d-lg-none d-block">
+                          <div id="nav-toggle">
+                              <div>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                              </div>
+                          </div>
+                          <div id="gloval-nav">
+                              <nav>
+                                  <ul>
+                                      <% if current_user %>
+                          <li>
+                              <%=link_to history_purchase_index_path, class: "login black" do %>
+                                <i class="fas fa-history header-menu-mark"></i>利用履歴
+                              <% end %>
+                          </li>
+                          <li>
+                              <%=link_to user_show_path, class: "login black" do %>
+                                <i class="fas fa-sign-in-alt header-menu-mark"></i>登録情報
+                              <% end %>
+                          </li>
+                        <% else %>
+                          <li>
+                              <a href="/login" class="login black">
+                                  <i class="fas fa-sign-in-alt header-menu-mark"></i>ログイン
+                              </a>
+                          </li>
+                        <% end %>
+                        <% if current_user %>
+                        <li>
+                            <a href="/logout" class="new-account">ログアウト</a>
+                        </li>
+                        <% else %>   
+                        <li>
+                            <a href="/signup" class="new-account">アカウント作成</a>
+                        </li>
+                        <% end %>                   
+                                  </ul>
+                              </nav>
+                          </div>
+                      </div>                         
+                      </ul>
+                  </div>
+              </div>
+          </div>                       
+      </header>
+
+    <%= render 'layouts/notifications' %>
+    
+      <%= yield %>
+      <footer id="footer">
+        <div class="inner">
+            <div class="madeby">Made by Hikaru Shimada & Takafumi Noiri</div>
+            <div class="sns">
+                <p class="follow">Follow Me</p>
+                <a href="https://www.facebook.com/shimahika21/?ref=page_internal" target="_blank" rel="noopener noreferrer"><p class="facebook-foo sns-item-foo"><i class="fab fa-facebook-f"></i>Facebook</p></a>
+                <a href="https://twitter.com/Hikkar_skybee" target="_blank" rel="noopener noreferrer"><p class="twitter-foo sns-item-foo"><i class="fab fa-twitter"></i>Twitter</p></a>
+            </div>
+        </div>
+      </footer>
+    </div>
+
+<script type="text/javascript" src="https://js.parking.js/"></script>    
   </body>
 
 </html>

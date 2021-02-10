@@ -1,39 +1,111 @@
 <%#=TOP%>
-    <div class="section container-fluid pur-done-sct1" id="pur-his-sct1">
+    <div class="section container-fluid pur-his-sct1" id="pur-his-sct1">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 wrapper text-center pr-md-ad">
                     <div class="m-ad pr-bg" id="pr-start-top">
-                        <h2 class="pb-2per border-bottom subject">利用一覧</h2>
-                        <div class="my-20 row">
-                            <div class="col-xs-6 fs">
-                                利用開始時刻            
-                            </div>        
-                            <div class="col-xs-6 fs">
-                                <%=@parking.start_on.strftime('%Y年%m月%d日 %H:%M')%>
-                            </div>                  
-                        </div>
-                        <div class="my-20 row">
-                            <div class="col-xs-6 fs">
-                                利用終了予定時刻            
-                            </div>        
-                            <div class="col-xs-6 fs">
-                                <%=@parking.finish_on.strftime('%Y年%m月%d日 %H:%M')%>
-                            </div>                  
-                        </div>    
-                        <div class="list">
-                            <table>
-                                <thead class="text-bold">
-                                    <tr>
-                                        <th>金額</th>
-                                        <th>利用開始日</th>
-                                        <th>利用終了日</th>
-                                        <th>ステータス</th>
-                                        <th>作成日</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>                                                        
+                        <h2 class="pb-2per border-bottom subject">利用履歴</h2>
+                        <% if @histories.blank? && @parking.blank? && @reserve.blank? %>
+                          <div class="row list">
+                            <div class="col-xs-12 fs">まだ利用したことがありません</div>
+                            <div class="col-xs-12 fs">早速使ってみよう！</div>
+                            <div class="button-wrapper">
+                                <div class="col-xs-6">
+                                    <%= link_to("利用を開始する" ,"/parking/start") %>
+                                </div>
+                                <div class="col-xs-6">
+                                    <%= link_to("予約する" ,"/reserves/new", class: "reserve-button") %>
+                                </div>
+                            </div>
+                          </div>
+                        <% else %>
+                            <div class="list">
+                                <table>
+                                    <thead class="">
+                                        <tr>
+                                            <th class="style-head">利用スタイル</th>
+                                            <th class="price-head">金額</th>
+                                            <th class="start-head">利用開始日</th>
+                                            <th class="finish-head">利用終了日</th>
+                                            <th class="status-head">ステータス</th>                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-left">
+                                        <% if @parking %>
+                                            <tr>
+                                                <td class="style">
+                                                    <div class="park-style">その場</div>                                                    
+                                                </td>
+                                                <td class="price">
+                                                    <% if @parking.price %>
+                                                        ¥<%=@parking.price%>
+                                                    <% else %>
+                                                        未確定
+                                                    <% end %>
+                                                </td>
+                                                <td class="start"><%= @parking.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                <td class="finish">
+                                                    <% if @parking.finish_on %>
+                                                        <%= @parking.finish_on.strftime('%Y年%m月%d日 %H:%M') %>
+                                                    <% else %>
+                                                        利用中
+                                                    <% end %>
+                                                </td>
+                                                <td class="status">
+                                                    未払い
+                                                </td>                                        
+                                            </tr>
+                                        <% end %>
+                                        <% if @reserve %>
+                                            <tr>
+                                                <td class="style">
+                                                    <div class="reserve-style">予約</div>                                                    
+                                                </td>
+                                                <td class="price">                                                    
+                                                    ¥<%=@reserve.price%>
+                                                </td>
+                                                <td class="start"><%= @reserve.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                <td class="finish">                                                    
+                                                    <%= @reserve.finish_on.strftime('%Y年%m月%d日 %H:%M') %>
+                                                </td>
+                                                <td class="status">
+                                                    未払い
+                                                </td>                                        
+                                            </tr>
+                                        <% end %>
+                                        <% @histories.each do |history| %>
+                                            <tr>
+                                                <td class="style">
+                                                    <% if history.reservation_id == history.user_id %>
+                                                      <div class="reserve-style">予約</div>
+                                                    <% elsif history.no_reservation_id == history.user_id %>
+                                                      <div class="park-style">その場</div>
+                                                    <% end %>
+                                                </td>
+                                                <td class="price">
+                                                    <% if history.price %>
+                                                        ¥<%=history.price%>
+                                                    <% else %>
+                                                        未確定
+                                                    <% end %>
+                                                </td>
+                                                <td class="start"><%= history.start_on.strftime('%Y年%m月%d日 %H:%M') %></td>
+                                                <td class="finish">
+                                                    <% if history.finish_on %>
+                                                        <%= history.finish_on.strftime('%Y年%m月%d日 %H:%M') %>
+                                                    <% else %>
+                                                        利用中
+                                                    <% end %>
+                                                </td>
+                                                <td class="status">
+                                                    支払い済み
+                                                </td>                                        
+                                            </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>                                                        
+                        <% end %>
                     </div>
                     <div class="col-xs-12 top-button">
                         <a href="/" class="">

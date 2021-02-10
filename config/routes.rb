@@ -1,4 +1,12 @@
 Rails.application.routes.draw do  
+  resources :reserves, only: [:new, :show] do
+    collection do
+      get 'new', to: 'reserves#new'
+      post 'create', to: 'reserves#create'
+      get 'show', to: 'reserves#show'   
+      get 'done', to: 'reserves#done'
+    end
+  end
   resources :purchase, only: [:index] do
     collection do
       get 'index', to: 'purchase#index'
@@ -18,11 +26,12 @@ devise_for :users, controllers: {
   omniauth_callbacks: 'users/omniauth_callbacks',
   sessions:      'users/sessions',
   passwords:     'users/passwords',
-  registrations: 'users/registrations'
+  registrations: 'users/registrations'  
 }
   devise_scope :user do
+    get "passwords/new", :to => "users/passwords#new"
     get "user/select", :to => "users/sessions#detail"
-    get "user/:id", :to => "users/registrations#detail"
+    get "user/show", :to => "users/registrations#show"
     get "guest/signup", :to => "guests/registrations#new"
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"

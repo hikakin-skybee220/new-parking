@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :pay_alert
   def index
     @time = Time.current
     @timedisplay = Time.current.strftime('%Y年%m月%d日 %H:%M')

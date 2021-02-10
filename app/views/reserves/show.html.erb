@@ -1,0 +1,160 @@
+<%#=TOP%>
+    <div class="section container-fluid res-show-sct1" id="res-show-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center pr-md-ad">
+                    <div class="flash-text">
+                        予約申請が完了しました。<br>
+                        日時を確認してからお支払いへとお進みください。
+                    </div>
+                    <div class="m-ad pr-bg" id="pr-start-top">
+                        <h2 class="pb-2per border-bottom subject">利用内容</h2>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用開始時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@reserve.start_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="my-20 row">
+                            <div class="col-xs-6 fs">
+                                利用終了時刻            
+                            </div>        
+                            <div class="col-xs-6 fs">
+                                <%=@reserve.finish_on.strftime('%Y年%m月%d日 %H:%M')%>
+                            </div>                  
+                        </div>
+                        <div class="parking-description-list black-opa">
+                            <ul class="parking-description-inner">
+                                <li>※ 利用開始時刻と利用終了時刻をメモしてください。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" id="pr-start-price">
+                        <div class="pr-start-price-inner">
+                            <div class="pr-label d-none">
+                                予定金額
+                            </div>
+                            <div class="pr-display">
+                                ¥<%=@price%>(税込)                           
+                            </div>
+                        </div>
+                    </div>         
+                    <div class="col-xs-12">
+                        <% if @user.card.present? %>
+                            <div class="card-wrapper d-flex">
+                                <div class="card-info-title">
+                                    クレジットカード情報
+                                </div>
+                                <div class="card-info d-flex">
+                                    <div class="card-info-brand">
+                                        <img src="/cards/<%=@card_src%>" alt="クレジットカードブランド情報">
+                                    </div>
+                                    <div class="card-info-numbers">
+                                        <div class="number">
+                                            <%="**** **** **** " + @default_card_information.last4%>
+                                        </div>
+                                        <div class="expiration-date">
+                                            <div class="expiration-date-title">
+                                                有効期限
+                                            </div>
+                                            <div class="expiration-date-info">
+                                                <%=@exp_month + " / " + @exp_year%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="top-button">
+                                <%= link_to "登録クレジットカードで支払う", pay_purchase_index_path, method: :post, class: "btn" %>
+                            </div>  
+                        <% else %>        
+                            <div class="top-button col-xs-6 m-ad">
+                                <a href="#" id="purchase-new-account-button">
+                                    カードを登録して支払う
+                                </a>
+                            </div>
+                            <div class="top-button col-xs-6">
+                                <%= form_tag(controller: :purchase, action: :pay, method: :post) do %>
+                                    <script                    
+                                        type="text/javascript"
+                                        src="https://checkout.pay.jp/"
+                                        class="payjp-button"
+                                        data-key="pk_test_e22308e13375d08934d38e8f"
+                                        data-text="カードを登録しないで支払う">
+                                    </script>
+                                <% end %>
+                            </div>                        
+                        <% end %>
+                    </div>        
+                </div>            
+            </div>
+        </div>
+    </div>
+<%#=MODAL%>
+<div class="purchase-new-account-modal-wrapper" id="purchase-new-account-modal">    
+    <div class="purchase-new-account-modal-content">
+        <div class="overlay"></div>
+        <div class="modal">
+            <div class="conteiner text-center">
+                <div class="row">
+                    <div class="my-20 card-add">
+                        <%=form_tag(pay_card_index_path, method: :post ,id:'charge-form', name: "inputForm") do %>
+                                <div class="number-details">
+                                    <div class="card-number">
+                                        カード番号<span class="must-check">必須</span>
+                                    </div>
+                                </div>
+                                <div class="number">
+                                    <%= text_field_tag :number, "", class: "number", placeholder: "半角数字のみ" ,maxlength: "16", type: "text", id: "card_number" %>
+                                </div>
+                                <div class="brand-image">
+                                    <img src="/cards/logo_visa.gif" alt="各種クレジットカードブランドロゴ" class="brand-logo">
+                                    <img src="/cards/logo_mastercard.gif" alt="各種クレジットカードブランドロゴ" class="brand-logo">
+                                    <img src="/cards/jcb.png" alt="各種クレジットカードブランドロゴ" class="brand-logo">
+                                    <img src="/cards/american_express.png" alt="各種クレジットカードブランドロゴ" class="brand-logo">
+                                    <img src="/cards/discover.png" alt="各種クレジットカードブランドロゴ" class="brand-logo">
+                                    <img src="/cards/diners_club.png" alt="各種クレジットカードブランドロゴ" class="brand-logo">
+                                </div>        
+                                <div class="expirationdate">
+                                    <div class="expirationdate-details">
+                                        <div class="date">
+                                            有効期限<span class="must-check">必須</span>
+                                        </div>
+                                    </div>
+                                    <div class="expirationdate-choice d-flex">
+                                        <div class="month d-flex">
+                                            <%= select_tag "exp_month" ,options_for_select([['--', ''], ['01', '1'], ['02', '2'], ['03', '3'], ['04', '4'], ['05', '5'], ['06', '6'], ['07', '7'], ['08', '8'], ['09', '9'], ['10', '10'], ['11', '11'], ['12', '12']]) , type: "text"%>
+                                            <div class="month-detail">月</div>
+                                        </div>
+                                        <div class="year d-flex">
+                                            <%= select_tag "exp_year" ,options_for_select([['--', ''], ['21', '2021'], ['22', '2022'], ['23', '2023'], ['24', '2024'], ['25', '2025'], ['26', '2026'], ['27', '2027'], ['28', '2028'], ['29', '2029'], ['30', '2030'], ['31', '2031'], ['32', '2032']]), type: "text" %>
+                                            <div class="year-detail">年</div>
+                                        </div>
+                                    </div>
+                                </div>              
+                                <div class="securitycode">
+                                    <div class="securitycode-details">
+                                        <div class="securitycode-title">
+                                            セキュリティコード<span class="must-check">必須</span>
+                                        </div>
+                                    </div>
+                                    <div class="securitycode-cardsecurity">
+                                        <%= text_field_tag :cvc , "", class: "cvc", placeholder: "カード背面4桁もしくは3桁の番号", maxlength: "4", id: "cvc"%>
+                                    </div>
+                                </div>
+                                <div class="submit">
+                                    <%= submit_tag "登録する" , id: "token_submit_for_reservation", name: "reservation_commit"%>
+                                </div>
+                            <% end %>                                             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+    
+    

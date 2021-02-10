@@ -1,3 +1,17 @@
 <% flash.each do |key, value| %>
   <%= content_tag(:div, value, class: key) %>
 <% end %>
+<% if @reserve %>
+  <% @reserve.errors.full_messages.each do |message| %>
+    <div class="alert reserve-alert alert-danger">
+      <%= message %>
+    </div>
+  <% end %>  
+<% end %>
+<% if @parking %>
+  <% @parking.errors.full_messages.each do |message| %>
+    <div class="alert reserve-alert alert-danger">
+      <%= message %>
+    </div>
+  <% end %>  
+<% end %>
