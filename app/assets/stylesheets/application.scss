@@ -460,56 +460,90 @@ $sp: 480px;  // スマホ
                 }
             }
         }
-        .relative{                        
-            img{
+        .relative{ 
+            .arround-image-wrapper {
                 position: absolute;
-                width: 45%;
-                height: 520px;
                 right: 0;
-            }          
+                display: flex;
+                width: 50%;
+                flex-flow: wrap;
+                height: 479px;
+                .image-inner {
+                    width: 33.333%;
+                    min-width: 33.333%;
+                    img {
+                        padding: 4px;
+                        border-radius: 6px;
+                    }                                    
+                }
+            }       
             iframe.map {
                 position: absolute;
                 top: 72px;
                 left: 2.5%;
-                width: 50%;
+                width: 45%;
                 height: 575px;
             }  
         }
         @include pc {
+            padding: 100px 0 572px 0;
             .relative{                        
-                img{
+                .arround-image-wrapper {
                     position: absolute;
-                    width: 45%;
-                    height: 480px;
                     right: 0;
-                }          
+                    display: flex;
+                    width: 52%;
+                    flex-flow: wrap;
+                    height: 440px;
+                    .image-inner {
+                        width: 33.333%;
+                        min-width: 33.333%;
+                        img {
+                            padding: 4px;
+                            border-radius: 6px;
+                        }                                    
+                    }
+                }              
                 iframe.map {
                     position: absolute;
                     top: 125px;
                     left: 2.5%;
-                    width: 50%;
-                    height: 525px;
+                    width: 40%;
+                    height: 425px;
                 }  
             }
           };
           @include tab {    
+            padding: 100px 0 650px 0;
             .relative{                        
-                img{
+                .arround-image-wrapper {
                     position: absolute;
-                    width: 60%;
-                    height: 480px;
                     right: 0;
-                }          
+                    display: flex;
+                    width: 75%;
+                    flex-flow: wrap;
+                    height: 396px;
+                    top: 41px;
+                    .image-inner {
+                        width: 33.333%;
+                        min-width: 33.333%;
+                        img {
+                            padding: 4px;
+                            border-radius: 6px;
+                        }                                    
+                    }
+                }             
                 iframe.map {
                     position: absolute;
-                    top: 508px;
+                    top: 480px;
                     left: 0%;
-                    width: 60%;
+                    width: 70%;
                     height: 525px;
                 }  
             }        
           };
           @include sp {    
+            padding: 100px 0 560px 0;
             .admin-box{                
                 .up-icon{                    
                     width: 151px;
@@ -518,17 +552,33 @@ $sp: 480px;  // スマホ
                     top: 19px;
                 }
             }
-            .relative{                        
-                img {
+            .relative{                                    
+                .arround-image-wrapper {
                     position: absolute;
-                    width: 92%;
-                    height: 333px;
                     right: 0;
-                    top: 24px;
-                }       
+                    display: flex;
+                    width: 100%;
+                    flex-flow: nowrap;
+                    height: 230px;
+                    padding: 0 16px;                    
+                    overflow: visible; 
+                    overflow-x: scroll;  
+                    top: 20px;  
+                    .image-inner {
+                        display: inline-block;
+                        padding-right: 8px;
+                        overflow: hidden;
+                        width: 250px;
+                        min-width: 250px;
+                        img {
+                            padding: 4px;
+                            border-radius: 0;
+                        }                                    
+                    }
+                }          
                 iframe.map {
                     position: absolute;
-                    top: 384px;
+                    top: 280px;
                     left: 0%;
                     width: 92%;
                     height: 333px;
