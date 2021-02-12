@@ -2,6 +2,14 @@ document.addEventListener("turbolinks:load"
 , function () {
 $(function() {
 
+  $('#nav-toggle').on('click', function () {
+    $('body').toggleClass('open');
+
+  });
+  $('#gloval-nav nav ul li a').on('click', function () {
+    $('body').removeClass('open');
+  });
+
 
 
   // FLASH FADEOUT
