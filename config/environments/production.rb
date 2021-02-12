@@ -110,7 +110,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { :host => 'shimahika-parking.herokuapp.com' }
+  # config.action_mailer.default_url_options = { :host => 'shimahika-parking.herokuapp.com' }
   # config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.perform_deliveries = true
@@ -140,8 +140,10 @@ Rails.application.configure do
   :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
   :password       => ENV['MAILGUN_SMTP_PASSWORD'],
   :domain         => 'shimahika-parking.heroku.com',
+  # :enable_starttls_auto => true,
   :authentication => :plain,
 }
 ActionMailer::Base.delivery_method = :smtp
+# ActionMailer::Base.default_url_options = { host: 'shimahika-parking.herokuapp.com' }
 
 end
