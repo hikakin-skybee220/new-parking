@@ -245,14 +245,14 @@
                         </p>
                     </div>                        
                     <div class="col-xs-12 field up">
-                        <a href="/login" class="">
+                        <%= link_to  "/login",class: "",'data-turbolinks': false do %>  
                             <p class="form-for-area">ログイン</p>
-                        </a>
+                        <% end %>
                     </div>                                                
-                    <div class="col-xs-12 field up">     
-                        <a href="/signup" class="">
+                    <div class="col-xs-12 field up">
+                        <%= link_to "/signup",class: "",'data-turbolinks': false do %>  
                             <p class="form-for-area">アカウント作成</p>
-                        </a>
+                        <% end %>
                     </div>                        
                     <%#div class="col-xs-6 field right">  
                         <a href="/guest/signup" class="">

@@ -1,11 +1,11 @@
 class CardController < ApplicationController
-  require "payjp"
+  require 'payjp'
   before_action :pay_alert
   before_action :authenticate_user!
 
   def new
     @card = Card.where(user_id: @current_user.id)
-    redirect_to controller: "user" ,action: "show" if @card.exists?
+    redirect_to user_path if @card.exists?
   end
 
   def pay #payjpとCardのデータベース作成を実施します。
@@ -19,7 +19,7 @@ class CardController < ApplicationController
       ) #念の為metadataにuser_idを入れましたがなくてもOK
       @card = Card.new(user_id: @current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save        
-        redirect_to controller: "user" ,action: "show"
+        redirect_to user_path
       else
         redirect_to action: "pay"
       end
@@ -71,7 +71,7 @@ class CardController < ApplicationController
         redirect_to("/")
         flash[:notice] = "削除しました。"
       else
-        redirect_to controller: "user" ,action: "show", alert: "削除できませんでした。"
+        redirect_to user_path, alert: "削除できませんでした。"
       end
     end
       

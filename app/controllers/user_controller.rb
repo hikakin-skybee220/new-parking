@@ -15,7 +15,7 @@ class UserController < ApplicationController
             flash[:notice] = "アカウントが作成されました。"
         else
             redirect_to action: "new"
-            flash[:alert] = "もう一度お願いします?。"
+            flash[:alert] = "もう一度お願いします。"
         end
     end
 

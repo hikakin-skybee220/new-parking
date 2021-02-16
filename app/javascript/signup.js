@@ -1,6 +1,6 @@
 
 $(function() {
-    if (document.getElementById("newPasswordForm") != null) { 
+    if (document.getElementById("signupForm") != null) { 
         const auth = firebase.auth();    
         // signup
         const signupForm = document.querySelector('#signupForm');
