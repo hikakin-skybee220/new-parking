@@ -11,9 +11,9 @@ $(function() {
             // Email sent.
             var href = $('#newPasswordForm').attr('action');
             location.href = href; 
-            alert(`メールを送信しました`);
+            console.log(`メールを送信しました`);
         }).catch(function(error) {
-            alert(`メールを送信できませんでした (${error})`);
+            console.log(`メールを送信できませんでした (${error})`);
         });
         });
     }

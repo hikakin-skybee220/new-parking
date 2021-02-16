@@ -19,9 +19,9 @@ $(function() {
                         $('<input type="hidden" name="user-email-token">').val(user.email)                            
                     ); //取得したトークンを送信できる状態にします
                     document.inputForm.submit();  
-                    alert("Successful editing!")
+                    console.log("Successful editing!")
                 }).catch((error) => {
-                    alert(`アカウントを編集できませんでした (${error})`);
+                    console.log(`アカウントを編集できませんでした (${error})`);
                 });              
             } else {
                 console.log('user logged out')
@@ -38,11 +38,11 @@ $(function() {
               if (user) {
                   var user = firebase.auth().currentUser;
                   user.delete().then(function() {
-                      alert("Delate account!")
+                      console.log("Delate account!")
                       var href = $(destroyBtn).attr('href');
                       location.href = href; 
                   }).catch((error) => {
-                      alert(`アカウントを削除できませんでした (${error})`);
+                      console.log(`アカウントを削除できませんでした (${error})`);
                     });              
               } else {
                   console.log('user logged out')
