@@ -20,7 +20,7 @@
                     </h1>
                     <div class="row d-flex m-ad">
                         <div class="col-xs-6">
-                            <% if current_user %>
+                            <% if @current_user %>
                                 <a href="/parking/start">
                                     <p>利用を開始する</p>
                                 </a>
@@ -31,7 +31,7 @@
                             <% end %>
                         </div>
                         <div class="col-xs-6">
-                            <% if current_user %>
+                            <% if @current_user %>
                                 <% if @parking && @parking.finish_stamp == "no" && @parking.finish_on %>
                                     <a href="/purchase/index" id="">
                                         <p>利用を終了する</p>
@@ -68,7 +68,7 @@
                     </h1>
                     <div class="d-flex m-ad">
                         <div class="col-xs-12 reserve-button">
-                            <% if current_user %>
+                            <% if @current_user %>
                                 <a href="/reserves/new">
                                     <p>予約する</p>
                                 </a>
@@ -199,7 +199,7 @@
 </div>
 
 <%#=MODAL%>
-    <% if current_user %>
+    <% if @current_user %>
         <div class="parking-finish-modal-wrapper" id="parking-finish-modal">    
             <div class="parking-finish-modal-content">
                 <div class="overlay"></div>
@@ -245,14 +245,14 @@
                         </p>
                     </div>                        
                     <div class="col-xs-12 field up">
-                        <a href="/login" class="">
+                        <%= link_to  "/login",class: "",'data-turbolinks': false do %>  
                             <p class="form-for-area">ログイン</p>
-                        </a>
+                        <% end %>
                     </div>                                                
-                    <div class="col-xs-12 field up">     
-                        <a href="/signup" class="">
+                    <div class="col-xs-12 field up">
+                        <%= link_to "/signup",class: "",'data-turbolinks': false do %>  
                             <p class="form-for-area">アカウント作成</p>
-                        </a>
+                        <% end %>
                     </div>                        
                     <%#div class="col-xs-6 field right">  
                         <a href="/guest/signup" class="">

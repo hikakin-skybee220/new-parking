@@ -1,10 +1,11 @@
 class CardController < ApplicationController
-  require "payjp"
+  require 'payjp'
   before_action :pay_alert
+  before_action :authenticate_user!
 
   def new
-    @card = Card.where(user_id: current_user.id)
-    redirect_to controller: "users/registrations" ,action: "show" if @card.exists?
+    @card = Card.where(user_id: @current_user.id)
+    redirect_to user_path if @card.exists?
   end
 
   def pay #payjpとCardのデータベース作成を実施します。
@@ -12,24 +13,24 @@ class CardController < ApplicationController
     if params['payjp-token']
       customer = Payjp::Customer.create(
       description: '登録テスト', #なくてもOK
-      email: current_user.email, #なくてもOK
+      email: @current_user.email, #なくてもOK
       card: params['payjp-token'],
-      metadata: {user_id: current_user.id}
+      metadata: {user_id: @current_user.id}
       ) #念の為metadataにuser_idを入れましたがなくてもOK
-      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
+      @card = Card.new(user_id: @current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save        
-        redirect_to controller: "users/registrations" ,action: "show"
+        redirect_to user_path
       else
         redirect_to action: "pay"
       end
     elsif params['payjp-token-for-new-account']
       customer = Payjp::Customer.create(
       description: '登録テスト', #なくてもOK
-      email: current_user.email, #なくてもOK
+      email: @current_user.email, #なくてもOK
       card: params['payjp-token-for-new-account'],
-      metadata: {user_id: current_user.id}
+      metadata: {user_id: @current_user.id}
       ) #念の為metadataにuser_idを入れましたがなくてもOK
-      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
+      @card = Card.new(user_id: @current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
         redirect_to("/purchase/index")
       else
@@ -38,11 +39,11 @@ class CardController < ApplicationController
     elsif params['payjp-token-for-reservation']
       customer = Payjp::Customer.create(
       description: '登録テスト', #なくてもOK
-      email: current_user.email, #なくてもOK
+      email: @current_user.email, #なくてもOK
       card: params['payjp-token-for-reservation'],
-      metadata: {user_id: current_user.id}
+      metadata: {user_id: @current_user.id}
       ) #念の為metadataにuser_idを入れましたがなくてもOK
-      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
+      @card = Card.new(user_id: @current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
         redirect_to("/reserves/show")
       else
@@ -58,7 +59,7 @@ class CardController < ApplicationController
   end
 
   def delete #PayjpとCardデータベースを削除します
-    card = Card.where(user_id: current_user.id).first
+    card = Card.where(user_id: @current_user.id).first
     if card.blank?
       redirect_to action: "new"
     else
@@ -70,14 +71,14 @@ class CardController < ApplicationController
         redirect_to("/")
         flash[:notice] = "削除しました。"
       else
-        redirect_to controller: "users/registrations" ,action: "show", alert: "削除できませんでした。"
+        redirect_to user_path, alert: "削除できませんでした。"
       end
     end
       
   end
 
   def show #Cardのデータpayjpに送り情報を取り出します
-    card = Card.where(user_id: current_user.id).first
+    card = Card.where(user_id: @current_user.id).first
     if card.blank?
       redirect_to action: "new" 
     else

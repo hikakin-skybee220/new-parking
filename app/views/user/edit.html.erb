@@ -1,0 +1,41 @@
+<%#=TOP%>
+  <div class="section container-fluid dev-reg-edit-sct1" id="dev-reg-edit-sct1">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12 wrapper text-center pr-md-ad">
+                  <div class="m-ad pr-bg" id="pr-start-top">
+                      <h2 class="pb-2per border-bottom subject">登録情報</h2>
+                      <%=form_tag("/user/update", method: :post ,id:'updateForm', name: "inputForm") do %>                                                                 
+                        <ul class="text-left">
+                            <li>
+                                <span class="left">名前</span>
+                                <span class="right">
+                                  <%= text_field_tag :name,"",  class: "field-area", value: "#{@user.name}" %>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="left">メールアドレス</span>
+                                <span class="right">                                   
+                                  <%= email_field_tag :email,"", class: "field-area", id: "update-email", value: "#{@user.email}" %>                                                       
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="submit edit-btn">
+                          <%= submit_tag "変更する" ,class: "edit_link_btn", id: "updateSubmit" %>
+                        </div>
+                        <div class="field-memory-login">
+                          <%= link_to "アカウントを削除する", "/user/destroy", method: :post, id: "destroyButton",'data-turbolinks': false %>
+                        </div>
+                      <% end %>
+                  </div> 
+                  <div class="col-xs-12 top-button">                      
+                      <%= link_to "トップページに戻る", "/", method: :get,'data-turbolinks': false %>
+                  </div>                    
+              </div>            
+          </div>
+      </div>
+  </div>
+
+
+    
+    

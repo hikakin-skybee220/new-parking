@@ -22,21 +22,21 @@ Rails.application.routes.draw do
 #   passwords:     'admins/passwords',
 #   registrations: 'admins/registrations'
 # }
-devise_for :users, controllers: {
-  omniauth_callbacks: 'users/omniauth_callbacks',
-  sessions:      'users/sessions',
-  passwords:     'users/passwords',
-  registrations: 'users/registrations'  
-}
-  devise_scope :user do
-    get "passwords/new", :to => "users/passwords#new"
-    get "user/select", :to => "users/sessions#detail"
-    get "user/show", :to => "users/registrations#show"
-    get "guest/signup", :to => "guests/registrations#new"
-    get "signup", :to => "users/registrations#new"
-    get "login", :to => "users/sessions#new"
-    get "logout", :to => "users/sessions#destroy"
-  end
+# devise_for :users, controllers: {
+#   omniauth_callbacks: 'users/omniauth_callbacks',
+#   sessions:      'users/sessions',
+#   passwords:     'users/passwords',
+#   registrations: 'users/registrations'  
+# }
+#   devise_scope :user do
+#     get "passwords/new", :to => "users/passwords#new"
+#     get "user/select", :to => "users/sessions#detail"
+#     get "user/show", :to => "users/registrations#show"
+#     get "guest/signup", :to => "guests/registrations#new"
+#     get "signup", :to => "users/registrations#new"
+#     get "login", :to => "users/sessions#new"
+#     get "logout", :to => "users/sessions#destroy"
+#   end
   # devise_scope :guest do    
   #   get "guest/:id", :to => "guests/registrations#detail"
   #   get "guest/signup", :to => "guests/registrations#new"
@@ -51,8 +51,27 @@ devise_for :users, controllers: {
     end
   end
 
-  get "how_user" => "parking#how_user"
-  get 'users/index'
+  resources :user, only: [:show, :edit] do
+    collection do      
+      post 'googlecreate', to: 'user#googlecreate'
+      post 'create', to: 'user#create'
+      post 'update', to: 'user#update'
+      post 'destroy', to: 'user#destroy'
+    end
+  end
+  resources :password, only: [:new, :edit] do
+    collection do      
+      post 'create', to: 'user#create'
+      post 'update', to: 'user#update'     
+    end
+  end
+
+  post 'accounts' => "accounts#create"
+  get 'signup' => "user#new"
+  post 'login/googlecreate' => "firebase_sessions#create"
+  post 'login' => "sessions#create"
+  get 'login' => "sessions#new"
+  get 'logout' => "sessions#destroy"
   get 'parking/confirmations' => "parking#confirmations"
   get 'parking/start' => "parking#start"
   post 'parking/finish' => "parking#finish"

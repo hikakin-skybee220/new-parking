@@ -366,6 +366,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  jwt
   listen (~> 3.2)
   omniauth (= 1.9.1)
   omniauth-facebook
