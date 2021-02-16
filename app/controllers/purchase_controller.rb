@@ -4,17 +4,17 @@ class PurchaseController < ApplicationController
   before_action :pay_alert ,except: :index
 
   def index
-    @user = current_user    
+    @user = @current_user    
     if @parking = Park.find_by(user_id: @user.id, finish_stamp: "no")  
       if @parking.finish_on
-        if @user.card.present?
-          card = Card.where(user_id: @user.id).first
+        @card = Card.where(user_id: @user.id).first
+        if @card.present?
           #Cardテーブルは前回記事で作成、テーブルからpayjpの顧客IDを検索                          
           Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
           #保管した顧客IDでpayjpから情報取得
-          customer = Payjp::Customer.retrieve(card.customer_id)
+          customer = Payjp::Customer.retrieve(@card.customer_id)
           #保管したカードIDでpayjpから情報取得、カード情報表示のためインスタンス変数に代入
-          @default_card_information = customer.cards.retrieve(card.card_id)  
+          @default_card_information = customer.cards.retrieve(@card.card_id)  
           ##カードのアイコン表示のための定義づけ
           @card_brand = @default_card_information.brand
           case @card_brand
@@ -49,16 +49,16 @@ class PurchaseController < ApplicationController
   end
 
   def pay
-    @user = current_user
+    @user = @current_user
     @path = Rails.application.routes.recognize_path(request.referer)
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']  
     if @path[:controller] == "purchase"
       @parking = Park.find_by(user_id: @user.id, finish_stamp: "no")
       @price = @parking.price
-      if @user.card.present?
+      @card = Card.find_by(user_id: @user.id)                   
+      if @card.present?
         # ログインユーザーがクレジットカード登録済みの場合の処理
         # ログインユーザーのクレジットカード情報を引っ張ってきます。
-        @card = Card.find_by(user_id: @user.id)                   
         #登録したカードでの、クレジットカード決済処理
         charge = Payjp::Charge.create(
         # 商品(product)の値段を引っ張ってきて決済金額(amount)に入れる
@@ -82,8 +82,8 @@ class PurchaseController < ApplicationController
     elsif @path[:controller] == "reserves"
       @reserve = Reserve.find_by(user_id: @user.id, price_stamp: "no")
       @price = @reserve.price
-      if @user.card.present?
-        @card = Card.find_by(user_id: @user.id)
+      @card = Card.find_by(user_id: @user.id)
+      if @card.present?
         Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']             
         charge = Payjp::Charge.create(
         amount: @price,
@@ -105,14 +105,14 @@ class PurchaseController < ApplicationController
   end
 
   def done
-    @user = current_user    
+    @user = @current_user    
     @parking = Park.where(user_id: @user.id, finish_stamp: "yes").last
     @price = @parking.price
   end
 
   def history
-    @histories = Purchase.where(user_id: current_user.id).order(start_on: :desc)
-    @parking = Park.find_by(user_id: current_user.id, finish_stamp: "no")
-    @reserve = Reserve.find_by(user_id: current_user.id, price_stamp: "no")
+    @histories = Purchase.where(user_id: @current_user.id).order(start_on: :desc)
+    @parking = Park.find_by(user_id: @current_user.id, finish_stamp: "no")
+    @reserve = Reserve.find_by(user_id: @current_user.id, price_stamp: "no")
   end
 end

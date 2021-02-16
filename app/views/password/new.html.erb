@@ -1,0 +1,21 @@
+<div class="section container-fluid dev-pass-new-sct1" id="dev-pass-new-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center">
+                  <div class="pr-md-ad">
+                    <h2>パスワードをお忘れでしたらメールを送って再設定ができます。</h2>
+                    
+                    <%=form_tag("/login", method: :get ,id:'newPasswordForm', name: "inputForm") do %>                                         
+                      <div class="field">
+                        <div class="control-label text-left" for="">メールアドレス</div>
+                        <%= email_field_tag :email,"", class: "field-area", autofocus: true, id: "password-email" %>                         
+                      </div>
+                      <div class="submit">                        
+                        <%= submit_tag "再設定用メールを送信する" , id: "newPasswordSubmit",'data-turbolinks': false %>  
+                      </div>
+                    <% end %> 
+                  </div>                                               
+                </div>            
+            </div>
+        </div>
+    </div>

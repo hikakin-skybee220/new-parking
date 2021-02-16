@@ -1,3 +1,5 @@
+document.addEventListener("turbolinks:load" 
+, function () {  
 document.addEventListener(
   "DOMContentLoaded", e => {
     if (document.getElementById("token_submit") != null) { //token_submitというidがnullの場合、下記コードを実行しない
@@ -75,7 +77,7 @@ document.addEventListener(
               $('<input type="hidden" name="payjp-token-for-reservation">').val(response.id)
             ); //取得したトークンを送信できる状態にします
             document.inputForm.submit();
-            // alert("登録が完了しました"); //確認用            
+            alert("登録が完了しました"); //確認用            
           } else {
             alert("カード情報が正しくありません。"); //確認用
           }
@@ -85,3 +87,4 @@ document.addEventListener(
   },
   false
 );
+})

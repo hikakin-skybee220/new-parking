@@ -1,0 +1,50 @@
+
+<div class="section container-fluid" id="lg-sct1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 wrapper text-center">
+                  <div class="pr-md-ad">
+                    <h2>ログイン</h2>
+                    <%=form_tag(login_path, method: :post ,id:'loginForm', name: "inputForm") do %>                                       
+                      <div class="field">
+                        <div class="control-label text-left" for="">メールアドレス</div>
+                        <%= email_field_tag :email,"", class: "field-area", id: "login-email", autofocus: true %>                         
+                      </div>
+                      <div class="field">
+                        <div class="control-label text-left" for="">パスワード</div>                        
+                        <%= password_field_tag :password,"", class: "field-area", id: "login-password" %>                             
+                      </div>                      
+                      <div class="field-memory-login text-left">                        
+                        <%= link_to "パスワードをお忘れですか？", "/password/new",'data-turbolinks': false%>
+                      </div>                      
+                      <div class="submit">                        
+                        <%= submit_tag "ログイン" , id: "loginSubmit" %>           
+                      </div>
+                    <% end %> 
+                    <p class="or">または</p>
+                    <div class="field">
+                      <a href="/users/auth/facebook">
+                        <p class="sns-login"><i class="fab fa-facebook"></i>facebookでログイン</p>
+                      </a>
+                    </div>  
+                    <div class="field">
+                      <a href="/users/auth/google_oauth2">
+                        <p class="sns-login"><i class="fab fa-google"></i>gmailでログイン</p>
+                      </a>
+                    </div>  
+                    <div class="field">
+                      <a href="/users/auth/twitter">
+                        <p class="sns-login"><i class="fab fa-twitter"></i>twitterでログイン</p>
+                      </a>
+                    </div>
+                    <div id="firebaseui-auth-container"></div>
+                    <div id="loader">Now Loading...</div>  
+                    <div class="field-memory-login">
+                        <%= link_to "アカウントの新規作成", "/signup",'data-turbolinks': false%>
+                    </div>
+                  </div>
+                                               
+                </div>            
+            </div>
+        </div>
+    </div>

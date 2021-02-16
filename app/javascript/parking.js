@@ -129,9 +129,9 @@ $(function() {
 
   // ウィンドウをスクロール・ロード・リサイズしたときを契機に、
   // 「TOPに戻る】ボタンの表示・非表示を変更します。
-  $(window).scroll(changeButtonState)
-           .load(changeButtonState)
-           .resize(changeButtonState);
+  $(window).on('scroll' ,changeButtonState)
+           .on('load', changeButtonState)
+           .on('resize',changeButtonState);
 
 
   

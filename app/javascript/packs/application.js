@@ -8,8 +8,14 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require('parking.js')
 require('payjp.js')
+require('auth.js')
+require('signup.js')
+require('login.js')
+require('update.js')
+require('password.js')
+require('firebase.js')
+require('parking.js')
 
 
 

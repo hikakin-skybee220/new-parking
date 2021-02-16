@@ -1325,8 +1325,8 @@ $sp: 480px;  // スマホ
                 font-size: 18px;
             }
             .button-wrapper{
-                margin: 0 100px;
-                .col-xs-6{
+                margin: 0 0;
+                .col-sm-6{
                     padding: 45px 0 30px;
                     a{
                         color: white;
@@ -1877,7 +1877,7 @@ $sp: 480px;  // スマホ
             .field-memory-login{                
                 margin: 0 0 10px 0;   
             }
-            .actions input{
+            .submit input{
                 border-radius: 4px;
                 background: #000;
                 border: 3px solid #000;
@@ -1974,7 +1974,7 @@ $sp: 480px;  // スマホ
                 .field-memory-login{                
                     margin: 0 0 10px 0;   
                 }
-                .actions input{
+                .submit input{
                     border-radius: 4px;
                     background: #000;
                     border: 3px solid #000;

@@ -2,7 +2,7 @@ class ParkingController < ApplicationController
   before_action :authenticate_user!
   before_action :pay_alert
   def start
-    if Park.find_by(user_id: current_user.id, finish_stamp: "no")
+    if Park.find_by(user_id: @current_user.id, finish_stamp: "no")
       redirect_to("/purchase/history")
       flash[:alert] = "現在利用中です。"
     end
@@ -23,7 +23,7 @@ class ParkingController < ApplicationController
     params[:park][:start_on] = Time.current
     @parking = Park.new(params.require(:park).permit(:start_on, :finish_on_schedule))
     @parking.finish_stamp = "no"    
-    @parking.user_id = current_user.id    
+    @parking.user_id = @current_user.id    
     @time = Time.current
     @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
     @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
@@ -36,7 +36,7 @@ class ParkingController < ApplicationController
   end
 
   def confirmations
-    if @parking = Park.find_by(user_id:current_user.id , finish_stamp: "no")
+    if @parking = Park.find_by(user_id:@current_user.id , finish_stamp: "no")
       start = @parking.start_on
       finish = @parking.finish_on_schedule
       
@@ -71,7 +71,7 @@ class ParkingController < ApplicationController
   end
 
   def finish
-    if @parking = Park.where(user_id: current_user.id, finish_stamp: "no").last
+    if @parking = Park.where(user_id: @current_user.id, finish_stamp: "no").last
       if @parking.finish_on.blank?
         @parking.finish_on = Time.current
         @parking.finish_on_schedule = @parking.finish_on
