@@ -3,6 +3,8 @@ class PurchaseController < ApplicationController
   before_action :authenticate_user!
   before_action :pay_alert ,except: :index
 
+  protect_from_forgery :except => [:index]
+
   def index
     @user = @current_user    
     if @parking = Park.find_by(user_id: @user.id, finish_stamp: "no")  
@@ -69,11 +71,15 @@ class PurchaseController < ApplicationController
       else
         # ログインユーザーがクレジットカード登録されていない場合(Checkout機能による処理を行います)
         # APIの「Checkout」ライブラリによる決済処理の記述
-        Payjp::Charge.create(
-        amount: @price,
-        card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
-        currency: 'jpy'
-        )
+        
+      
+        # Payjp::Charge.create(
+        # amount: @price,
+        # card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
+        # currency: 'jpy'      
+        # )
+      
+
       end
       @purchase = Purchase.create(user_id: @user.id, no_reservation_id: @user.id, start_on: @parking.start_on, finish_on: @parking.finish_on, price: @price)
       @parking.finish_stamp = "yes"
@@ -100,7 +106,18 @@ class PurchaseController < ApplicationController
       @purchase = Purchase.create(user_id: @user.id, reservation_id: @user.id, start_on: @reserve.start_on, finish_on: @reserve.finish_on, price: @price)
       @reserve.price_stamp = "yes"
       @reserve.save
-      redirect_to controller: :reserves, action: :done
+      redirect_to controller: :reserves, action: :done    
+      
+      # Swiftから送信された場合
+    else
+      @price = 100
+        Payjp.api_key = ENV['PAYJP_PRIVATE_KEY'] 
+        Payjp::Charge.create(
+        amount: @price,
+        card: create_params[:card], # フォームを送信すると作成・送信されてくるトークン
+        currency: 'jpy'      
+        )
+
     end        
   end
 
@@ -115,4 +132,9 @@ class PurchaseController < ApplicationController
     @parking = Park.find_by(user_id: @current_user.id, finish_stamp: "no")
     @reserve = Reserve.find_by(user_id: @current_user.id, price_stamp: "no")
   end
+
+  private
+    def create_params
+      params.permit(:card)
+    end
 end

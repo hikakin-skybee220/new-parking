@@ -25,22 +25,22 @@
                       </div>
                     <% end %> 
                     <p class="or">または</p>
-                    <div class="field">
+                    <%#div class="field">
                       <a href="/users/auth/facebook">
                         <p class="sns-login"><i class="fab fa-facebook"></i>facebookで登録</p>
                       </a>
-                    </div>  
+                    </%div>  
                     <div class="field">
                       <a href="/users/auth/google_oauth2">
                         <p class="sns-login"><i class="fab fa-google"></i>gmailで登録</p>
                       </a>
                     </div>  
-                    <div class="field">
+                    <div% class="field">
                       <a href="/users/auth/twitter">
                         <p class="sns-login"><i class="fab fa-twitter"></i>twitterで登録</p>
                       </a>
-                    </div>                      
-                    <div id="firebaseui-auth-container"></div>
+                    </div%>                      
+                    <div id="firebaseui-auth-container" lang="ja"></div>
                     <div id="loader">Now Loading...</div>
                     <div class="field-memory-login">
                         <%= link_to "すでにアカウントをお持ちですか？", "/login",'data-turbolinks': false%>                     

@@ -4,13 +4,13 @@ $(function() {
 
 // listen for auth status changes
 const auth = firebase.auth();
-auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log('user logged in: ', user)        
-    } else {
-        console.log('user logged out')
-    }
-});
+// auth.onAuthStateChanged(user => {
+//     if (user) {
+//         console.log('user logged in: ', user)        
+//     } else {
+//         console.log('user logged out')
+//     }
+// });
     if (document.getElementById("logout") != null) { 
         const logout = document.querySelector('#logout');
         logout.addEventListener('click', (e) => {

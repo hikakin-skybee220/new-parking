@@ -5,7 +5,7 @@ class CardController < ApplicationController
 
   def new
     @card = Card.where(user_id: @current_user.id)
-    redirect_to user_path if @card.exists?
+    redirect_to("/user/#{@current_user.id}") if @card.exists?
   end
 
   def pay #payjpとCardのデータベース作成を実施します。

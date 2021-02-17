@@ -20,10 +20,10 @@ $(function() {
                 $('<input type="hidden" name="user-uid-token">').val(user.uid)                 
             ); //取得したトークンを送信できる状態にします
             document.inputForm.submit();  
-            alert("Successful login!")
+            console.log("Successful login!")
         }).catch((error) => {        
             var errorMessage = error.message;
-            alert(`ログインできませんでした (${errorMessage})`);
+            console.log(`ログインできませんでした (${errorMessage})`);
           });
     });
     }

@@ -22,10 +22,10 @@ $(function() {
                     $('<input type="hidden" name="user-uid-token">').val(user.uid)                 
                 ); //取得したトークンを送信できる状態にします
                 document.inputForm.submit();  
-                alert("Create account!")
+                console.log("Create account!")
             }).catch((error) => {        
                 var errorMessage = error.message;
-                alert(`アカウントを作成できませんでした (${errorMessage})`);
+                console.log(`アカウントを作成できませんでした (${errorMessage})`);
             });
         });
     }
