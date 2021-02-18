@@ -73,11 +73,11 @@ class PurchaseController < ApplicationController
         # APIの「Checkout」ライブラリによる決済処理の記述
         
       
-        # Payjp::Charge.create(
-        # amount: @price,
-        # card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
-        # currency: 'jpy'      
-        # )
+        Payjp::Charge.create(
+        amount: @price,
+        card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
+        currency: 'jpy'      
+        )
       
 
       end
@@ -110,8 +110,7 @@ class PurchaseController < ApplicationController
       
       # Swiftから送信された場合
     else
-      @price = 100
-        Payjp.api_key = ENV['PAYJP_PRIVATE_KEY'] 
+
         Payjp::Charge.create(
         amount: @price,
         card: create_params[:card], # フォームを送信すると作成・送信されてくるトークン
