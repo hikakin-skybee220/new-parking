@@ -101,7 +101,7 @@ class PurchaseController < ApplicationController
         amount: @price,
         card: params['payjp-token'], 
         currency: 'jpy'
-        )
+        )       
       end
       @purchase = Purchase.create(user_id: @user.id, reservation_id: @user.id, start_on: @reserve.start_on, finish_on: @reserve.finish_on, price: @price)
       @reserve.price_stamp = "yes"
