@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :reserves, only: [:new, :show] do
     collection do
       get 'new', to: 'reserves#new'
+      get 'indexJson', to: 'reserves#index_json'
       post 'create', to: 'reserves#create'
       get 'show', to: 'reserves#show'   
       get 'done', to: 'reserves#done'
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   resources :purchase, only: [:index] do
     collection do
       get 'index', to: 'purchase#index'
+      get 'indexJson', to: 'purchase#index_json'
       post 'pay', to: 'purchase#pay'
       get 'done', to: 'purchase#done'
       get 'history', to: 'purchase#history'
@@ -53,6 +55,7 @@ Rails.application.routes.draw do
 
   resources :user, only: [:show, :edit] do
     collection do      
+      get 'indexJson', to: 'user#index_json'
       post 'googlecreate', to: 'user#googlecreate'
       post 'create', to: 'user#create'
       post 'update', to: 'user#update'
@@ -66,6 +69,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'parking/indexJson' =>'parking#index_json'
   post 'accounts' => "accounts#create"
   get 'signup' => "user#new"
   post 'login/googlecreate' => "firebase_sessions#create"

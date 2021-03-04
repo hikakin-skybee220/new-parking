@@ -3,7 +3,7 @@ class PurchaseController < ApplicationController
   before_action :authenticate_user!
   before_action :pay_alert ,except: :index
 
-  protect_from_forgery :except => [:index]
+  protect_from_forgery :except => [:index_json]
 
   def index
     @user = @current_user    
@@ -110,12 +110,43 @@ class PurchaseController < ApplicationController
       
       # Swiftから送信された場合
     else
-
+      if create_params[:type] == "true"
+        @reserve = Reserve.find_by(user_id: create_params[:user_id].to_i, price_stamp: "no")
+        @price = @reserve.price
         Payjp::Charge.create(
-        amount: @price,
-        card: create_params[:card], # フォームを送信すると作成・送信されてくるトークン
-        currency: 'jpy'      
+          amount: @price,
+          card: create_params[:card], # フォームを送信すると作成・送信されてくるトークン
+          currency: 'jpy'      
         )
+        @purchase = Purchase.create(user_id: create_params[:user_id].to_i, reservation_id: create_params[:user_id].to_i, start_on: @reserve.start_on, finish_on: @reserve.finish_on, price: @price)
+        @reserve.price_stamp = "yes"
+        @reserve.save  
+
+        unless @purchase.save # もし、memoが保存できなかったら      
+          render json: @purchase, status: :created, location: @purchase
+        else
+          render json: @purchase.errors, status: :unprocessable_entity
+        end
+      else
+        @parking = Park.find_by(user_id: create_params[:user_id].to_i finish_stamp: "no")
+        @price = @parking.price
+        Payjp::Charge.create(
+          amount: @price,
+          card: create_params[:card], # フォームを送信すると作成・送信されてくるトークン
+          currency: 'jpy'      
+        )
+        @purchase = Purchase.new(user_id: create_params[:user_id].to_i, no_reservation_id: create_params[:user_id].to_i, start_on: @parking.start_on, finish_on: @parking.finish_on, price: @price)        
+        @parking.finish_stamp = "yes"
+        @parking.save
+
+        unless @purchase.save  
+          render json: @purchase, status: :created, location: @purchase
+        else
+          render json: @purchase.errors, status: :unprocessable_entity
+        end
+      end      
+      
+      
 
     end        
   end
@@ -132,8 +163,31 @@ class PurchaseController < ApplicationController
     @reserve = Reserve.find_by(user_id: @current_user.id, price_stamp: "no")
   end
 
+  def index_json
+    @purchases = Purchase.all        
+    render json: @purchases    
+  end
+
   private
     def create_params
-      params.permit(:card)
+      params.permit(:card,:type,:user_id)
+      # params(:type) 
     end
+
+    # def create_params2
+    #   params2(:type)      
+    # end
+
 end
+
+# def create
+
+#   create_params[:pay] = create_params[:pay].to_i
+#   @memo = Memo.new(create_params)      
+
+#   unless @memo.save # もし、memoが保存できなかったら      
+#     render json: @memo, status: :created, location: @memo
+#   else
+#     render json: @memo.errors, status: :unprocessable_entity
+#   end
+# end

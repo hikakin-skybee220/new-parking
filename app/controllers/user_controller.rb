@@ -3,10 +3,13 @@ class UserController < ApplicationController
     before_action :authenticate_user!
     before_action :pay_alert
 
-    def new
+    protect_from_forgery :except => [:index_json]
 
-    end
-
+  
+    def index_json
+        @users = User.all        
+        render json: @users    
+      end
     def create
         @user = User.new(name: params[:name],email: params['user-email-token'], uid: params['user-uid-token'])        
         if @user.save            
@@ -19,7 +22,7 @@ class UserController < ApplicationController
         end
     end
 
-    def googlecreate        
+    def googlecreate                
         User.create(
             email: params['user-email-token'],
             uid: params['user-uid-token']
