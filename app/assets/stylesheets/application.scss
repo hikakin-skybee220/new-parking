@@ -177,6 +177,9 @@ $sp: 480px;  // スマホ
 body::-webkit-scrollbar {  /* Chrome, Safari 対応 */
     display:none;
 }
+.inner{
+    margin: 0 20px;
+}
 
  
  body {    
@@ -967,7 +970,8 @@ body::-webkit-scrollbar {  /* Chrome, Safari 対応 */
 
     // PARKING CONFIRMATIONS PUR-INDEX-HISTORY-DONE 
     // CARD-NEW RES-NEW-SHOW-DONE REG-EDIT-SHOW
-    #pr-sct1, .pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .pur-his-sct1, .dev-reg-show-sct1, .card-new-sct1, .res-new-sct1, .res-show-sct1, .res-done-sct1, .dev-reg-edit-sct1{        
+    // terms
+    #pr-sct1, .pr-con-sct1, .pur-ind-sct1, .pur-done-sct1, .pur-his-sct1, .dev-reg-show-sct1, .card-new-sct1, .res-new-sct1, .res-show-sct1, .res-done-sct1, .dev-reg-edit-sct1 ,.terms, .security{        
         .pr-md-ad{
             margin: 25px 0;
             padding: 0 18%;
