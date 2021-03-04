@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   post 'parking/finish' => "parking#finish"
   post "parking/create" => "parking#create"
   post "/parking_create" => "parking#parking_create"
+  get 'privacy_policy' => 'home#privacy_policy'
   get 'security' => 'home#security'
   get 'terms' => 'home#terms'
   get '/' => "home#index"
