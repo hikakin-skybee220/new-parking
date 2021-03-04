@@ -128,7 +128,7 @@ class PurchaseController < ApplicationController
           render json: @purchase.errors, status: :unprocessable_entity
         end
       else
-        @parking = Park.find_by(user_id: create_params[:user_id].to_i finish_stamp: "no")
+        @parking = Park.find_by(user_id: create_params[:user_id].to_i ,finish_stamp: "no")
         @price = @parking.price
         Payjp::Charge.create(
           amount: @price,
