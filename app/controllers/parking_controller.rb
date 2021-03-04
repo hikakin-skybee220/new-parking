@@ -1,6 +1,9 @@
 class ParkingController < ApplicationController
   before_action :authenticate_user!
   before_action :pay_alert
+
+  protect_from_forgery :except => [:index_json]
+
   def start
     if Park.find_by(user_id: @current_user.id, finish_stamp: "no")
       redirect_to("/purchase/history")
@@ -20,18 +23,38 @@ class ParkingController < ApplicationController
   end
 
   def create    
-    params[:park][:start_on] = Time.current
-    @parking = Park.new(params.require(:park).permit(:start_on, :finish_on_schedule))
-    @parking.finish_stamp = "no"    
-    @parking.user_id = @current_user.id    
-    @time = Time.current
-    @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
-    @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
-    
-    if @parking.save      
-      redirect_to("/parking/confirmations")      
+    @path = Rails.application.routes.recognize_path(request.referer)
+
+    if @path[:controller] == "parking"
+      params[:park][:start_on] = Time.current
+      @parking = Park.new(params.require(:park).permit(:start_on, :finish_on_schedule))
+      @parking.finish_stamp = "no"    
+      @parking.user_id = @current_user.id    
+      @time = Time.current
+      @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
+      @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
+      
+      if @parking.save      
+        redirect_to("/parking/confirmations")      
+      else
+        render("/parking/start")
+      end
     else
-      render("/parking/start")
+      create_params[:start_on] = create_params[:start_on].to_i
+      create_params[:finish_on_schedule] = create_params[:finish_on_schedule].to_i
+      @parking = Park.new(create_params)  
+      @parking.finish_stamp = "no"    
+      @parking.user_id = create_params[:user_id].to_i    
+      @time = Time.current
+      @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
+      @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
+
+      unless @parking.save # もし、memoが保存できなかったら      
+        render json: @parking, status: :created, location: @parking
+      else
+        render json: @parking.errors, status: :unprocessable_entity
+      end
+
     end
   end
 
@@ -116,13 +139,14 @@ class ParkingController < ApplicationController
     end
   end
 
-  def how_user
-
+  def index_json
+    @parks = Park.all        
+    render json: @parks    
   end
-  def parking_create
 
-  end
-  def update
+  private
+    def create_params
+      params.permit(:start_on,:finish_on_schedule, :user_id)
+    end
 
-  end
 end

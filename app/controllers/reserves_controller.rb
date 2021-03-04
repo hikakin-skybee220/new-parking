@@ -2,6 +2,9 @@ class ReservesController < ApplicationController
   require "payjp"
   before_action :authenticate_user!
   before_action :pay_alert ,except: :show
+
+  # 忘れない
+  protect_from_forgery :except => [:index_json]
   def new
     @reserve = Reserve.new
     if Reserve.find_by(user_id: @current_user.id, price_stamp: "no")
@@ -15,48 +18,105 @@ class ReservesController < ApplicationController
     @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
   end
 
+  def index_json
+    @reserves = Reserve.all        
+    render json: @reserves    
+  end
+
   def create
-    @reserve = Reserve.new(params.require(:reserve).permit(:start_on, :finish_on))
-    @reserve.price_stamp = "no"
-    @reserve.user_id = @current_user.id    
-    start = @reserve.start_on
-    finish = @reserve.finish_on
-    
-    time = ((finish - start) / 3600).to_f
-    n = time
-    
-    money = 0
+    @path = Rails.application.routes.recognize_path(request.referer)
 
-    @time = time
-    day = (time/24).floor + 1
-    for i in 1...(day) do
-    n = n - 24
-    end
+    if @path[:controller] == "reserves"
+      @reserve = Reserve.new(params.require(:reserve).permit(:start_on, :finish_on))
+      @reserve.price_stamp = "no"
+      @reserve.user_id = @current_user.id    
+      start = @reserve.start_on
+      finish = @reserve.finish_on
+      
+      time = ((finish - start) / 3600).to_f
+      n = time
+      
+      money = 0
 
-    if (n <= 1 && n > 0)
-      money = 100
-    elsif (n <= 2&& n > 1)
-        money = 200
-    elsif (n <= 3&& n > 2)
-        money = 300
-    elsif (n <= 24&& n > 3)
-        money = 400
-    end
+      @time = time
+      day = (time/24).floor + 1
+      for i in 1...(day) do
+      n = n - 24
+      end
 
-    money = money + 400 * (day - 1)
+      if (n <= 1 && n > 0)
+        money = 100
+      elsif (n <= 2&& n > 1)
+          money = 200
+      elsif (n <= 3&& n > 2)
+          money = 300
+      elsif (n <= 24&& n > 3)
+          money = 400
+      end
 
-    @price = money 
+      money = money + 400 * (day - 1)
 
-    @time = Time.current
-    @timedisplay = Time.current.strftime('%Y年%m月%d日 %H:%M')
+      @price = money 
 
-    @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
-    @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
-    @reserve.price = @price
-    if @reserve.save      
-      redirect_to("/reserves/show")      
+      @time = Time.current
+      @timedisplay = Time.current.strftime('%Y年%m月%d日 %H:%M')
+
+      @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
+      @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
+      @reserve.price = @price
+      if @reserve.save      
+        redirect_to("/reserves/show")      
+      else
+        render("/reserves/new")
+      end    
+
     else
-      render("/reserves/new")
+      create_params[:start_on] = create_params[:start_on].to_i
+      create_params[:finish_on] = create_params[:finish_on].to_i
+      @reserve = Reserve.new(create_params)  
+      @reserve.price_stamp = "no"
+      @reserve.user_id = create_params[:user_id].to_i  
+      start = @reserve.start_on
+      finish = @reserve.finish_on
+      
+      time = ((finish - start) / 3600).to_f
+      n = time
+      
+      money = 0
+
+      @time = time
+      day = (time/24).floor + 1
+      for i in 1...(day) do
+      n = n - 24
+      end
+
+      if (n <= 1 && n > 0)
+        money = 100
+      elsif (n <= 2&& n > 1)
+          money = 200
+      elsif (n <= 3&& n > 2)
+          money = 300
+      elsif (n <= 24&& n > 3)
+          money = 400
+      end
+
+      money = money + 400 * (day - 1)
+
+      @price = money 
+
+      @time = Time.current
+      @timedisplay = Time.current.strftime('%Y年%m月%d日 %H:%M')
+
+      @now_reserve_user = Reserve.find_by('start_on <= ? AND finish_on >= ?',@time, @time)
+      @reserve_users = Reserve.where('start_on >= ?',@time).order(start_on: :asc)
+      @reserve.price = @price
+
+      unless @reserve.save # もし、memoが保存できなかったら      
+        render json: @reserve, status: :created, location: @reserve
+      else
+        render json: @reserve.errors, status: :unprocessable_entity
+      end
+
     end
   end
 
@@ -134,4 +194,10 @@ class ReservesController < ApplicationController
     @reserve = Reserve.where(user_id: @user.id, price_stamp: "yes").last
     @price = @reserve.price
   end
+
+  private
+    def create_params
+      params.permit(:start_on,:finish_on, :user_id)
+    end
+
 end
