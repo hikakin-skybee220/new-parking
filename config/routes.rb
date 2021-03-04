@@ -81,6 +81,8 @@ Rails.application.routes.draw do
   post 'parking/finish' => "parking#finish"
   post "parking/create" => "parking#create"
   post "/parking_create" => "parking#parking_create"
+  get 'security' => 'home#security'
+  get 'terms' => 'home#terms'
   get '/' => "home#index"
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
